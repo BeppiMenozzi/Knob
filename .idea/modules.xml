@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KnobSelector.iml" filepath="$PROJECT_DIR$/KnobSelector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/knoblibrary/knoblibrary.iml" filepath="$PROJECT_DIR$/knoblibrary/knoblibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/knobsample/knobsample.iml" filepath="$PROJECT_DIR$/knobsample/knobsample.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,34 @@
+<resources>
+    <declare-styleable name="KnobSelector">
+        <attr name="kNumberOfStates" format="integer"/>
+        <attr name="kDefaultState" format="integer"/>
+
+        <attr name="kBorderWidth" format="dimension"/>
+        <attr name="kBorderColor" format="reference|color"/>
+
+        <attr name="kIndicatorWidth" format="dimension"/>
+        <attr name="kIndicatorColor" format="reference|color"/>
+        <attr name="kIndicatorRelativeLength" format="float"/>
+
+        <attr name="kCircularIndicatorRelativeRadius" format="float"/>
+        <attr name="kCircularIndicatorRelativePosition" format="float"/>
+        <attr name="kCircularIndicatorColor" format="reference|color" />
+
+        <attr name="kKnobColor" format="reference|color"/>
+        <attr name="kKnobRelativeRadius" format="float"/>
+
+        <attr name="kKnobCenterColor" format="reference|color"/>
+        <attr name="kKnobCenterRelativeRadius" format="float"/>
+
+        <attr name="kStateMarkersWidth" format="dimension"/>
+        <attr name="kStateMarkersColor" format="reference|color"/>
+        <attr name="kStateMarkersRelativeLength" format="float"/>
+        <attr name="kSelectedStateMarkerColor" format="reference|color"/>
+
+        <attr name="kAnimation" format="boolean"/>
+        <attr name="kAnimationSpeed" format="float"/>
+        <attr name="kAnimationBounciness" format="float"/>
+
+        <attr name="kEnabled" format="boolean"/>
+    </declare-styleable>
+</resources>
