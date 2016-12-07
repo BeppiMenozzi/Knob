@@ -101,6 +101,14 @@ Here is the list of the xml attributes that can be used to customize the View. A
 * <b>kBorderColor</b> Color of the external circle.
 
 
+### (Still long) TODO List
+* put a drawable on the knoband of the center, choose if it can be rotated or not
+* draw important markers (for example, every 5)
+* implement gestures
+* allow to configure values packed on an arc, rather then on the whole circumference
+* allow to put multiple indicators
+
+
 Author
 -------
 * Beppi Menozzi
