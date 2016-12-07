@@ -71,7 +71,7 @@ Let's analyze the structure to understand how it is drawn before digging into th
 
 ### Customization
 Here is the list of the xml attributes that can be used to customize the View. All these attributes are available programmatically too.
-* <b>kNumberOfStates</b> Number of possible states. States are numbered from 0 to n-1.
+* <b>kNumberOfStates</b> Number of possible states. States are numbered from 0 to n-1. This number can be changed runtime, and the indicator will adjust its position accordingly.
 * <b>kDefaultState</b> The starting state of the knob.
 * <b>kAnimation</b> Enable / disable indicator's animation.
 * <b>kAnimationSpeed</b> Parameter "speed" applied to the spring physical model for the indicator's animation.
