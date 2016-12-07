@@ -20,7 +20,8 @@
         <it.beppi.knoblibrary.Knob
             android:id="@+id/knob1"
             android:layout_width="96dp"
-            android:layout_height="96dp" />
+            android:layout_height="96dp"
+            />
 
         <TextView
             android:id="@+id/textView1"
@@ -203,7 +204,8 @@
 <!--
 knob drawable
 center drawable
-circular indicator
 draw marker every
 swipe
+range only on an arc
+multiple indicators
 -->

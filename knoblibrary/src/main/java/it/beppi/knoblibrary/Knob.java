@@ -136,16 +136,12 @@ public class Knob extends View {
         double diff1 = Math.abs(angle0 - angle);
         double diff2 = Math.abs(angle - 2 * Math.PI - angle0);
 
-//        Log.d("beppim", "angle  " + Double.toString(angle));
-//        Log.d("beppim", "angle0 " + Double.toString(angle0));
-//        Log.d("beppim", "diff1  " + Double.toString(diff1));
-//        Log.d("beppim", "diff2  " + Double.toString(diff2));
-
         if (diff1<diff2) return angle; else return angle - 2 * Math.PI;
     }
 
     void paintIndicator(Canvas canvas) {
         if (indicatorWidth == 0) return;
+        if (indicatorRelativeLength == 0.0f) return;
         paint.setColor(indicatorColor);
         paint.setStrokeWidth(indicatorWidth);
 
