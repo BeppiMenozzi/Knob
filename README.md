@@ -9,7 +9,9 @@ The knob is a very powerful tool, that I could not find in the Android panorama:
 * It can manage any number of values without taking more space
 * It can be used as a way to insert data, and also for navigation as a page selector
 
-<i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i>
+<i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
+
+<img src="ezgif.com-ec0277b0a0.gif"><br>
 
 ### Setup
 In your project's build.gradle file:
@@ -58,8 +60,6 @@ Listener:
     ...
 
 ### Graphical structure
-<img src="ezgif.com-ec0277b0a0.gif"><br>
-
 The Knob is completely customizable. The many customizable attributes can all be set both via xml file, and programmatically.<br><br>
 Let's analyze the structure to understand how it is drawn before digging into the customization. The knob is made of these parts:<br><br>
 * A circle that represents the knob. The knob does not necessarily occupy the entire size of the view, but can be slightly smaller to leave space for, for example, the markers.
