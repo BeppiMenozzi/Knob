@@ -1,6 +1,6 @@
 # Rotating Knob Selector
 
-A customizable and very powerful button that replicates the behaviour of a knob with discrete values.<br><br>
+A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
 <img src="ezgif.com-b175d4980a.gif"><br><br>
 The knob is a very powerful tool, that I could not find in the Android panorama:
 
@@ -62,10 +62,10 @@ Listener:
 
 The Knob is completely customizable. The many customizable attributes can all be set both via xml file, and programmatically.<br><br>
 Let's analyze the structure to understand how it is drawn before digging into the customization. The knob is made of these parts:<br><br>
-* A circle that represents the knob. The knob does not necessarily occupy the entire size of the view, but can be smaller.
-* A set of markers that represent the available values. The markers are lines thatare drawn from the edge of the largest possible circle inside the view towards the center. They can lie outside or inside the knob. One of the markers is "selected" and can have its own color.
-* An indicator that represents the current value. The indicator is a line that is drawn from the edge of the knob circle inside the view towards the center. To the indicator a spring animation is applied.
-* A circular indicator that works exactly like the normal indicator, but is a drawn as a circle. Both indicator can live together.
+* A circle that represents the knob. The knob does not necessarily occupy the entire size of the view, but can be slightly smaller to leave space for, for example, the markers.
+* A set of markers that represent the available values. The markers are lines drawn from the edge of the largest possible circle inside the view towards the center. Therefore, they can lie outside or inside the knob. One of the markers is "selected" and can have its own color.
+* An indicator that represents the current value. The indicator is a line drawn from the knob circle edge towards the center. To the indicator a spring animation is applied.
+* A circular indicator that works exactly like the normal indicator, but is a drawn as a circle. The two ndicators can live alone or together.
 * A circle that represents the knob center.
 * An empty circle that represents the knob border.<br><br>
 
