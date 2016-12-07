@@ -4,10 +4,16 @@ A customizable selector that replicates the behaviour of a knob with discrete va
 <img src="ezgif.com-b175d4980a.gif"><br><br>
 The knob is a very powerful tool, that I could not find in the Android panorama:
 
-* It's of immediate understanding to the user
+* Existing also in the physical world, it's usage is immediately clear to the user
+* The value is graphically displayed as well as the number of possible choices
 * It occupies a very small space
-* It can manage any number of values without taking more space
-* It can be used as a way to insert data, and also for navigation as a page selector
+* It can manage any number of values without requiring more space
+* It can change the number of possible values without any mess
+<br><br>
+Possible usages are:
+* Replacement for a radio button
+* Replacement for a numeric value input
+* Replacement for a ViewPager indicator
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
 
