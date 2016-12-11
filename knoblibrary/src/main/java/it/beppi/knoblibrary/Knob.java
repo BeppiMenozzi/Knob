@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.facebook.rebound.SimpleSpringListener;
@@ -200,6 +201,9 @@ public class Knob extends View {
     private int stateMarkersColor = Color.BLACK;
     private int selectedStateMarkerColor = Color.YELLOW;
     private float stateMarkersRelativeLength = 0.08f;
+    private int swipeDirection = 2;
+    private int swipeSensibilityPixels = 100;
+    private int swipeX=0, swipeY=0;
 
 
     // initialize
@@ -265,9 +269,19 @@ public class Knob extends View {
         animationSpeed = typedArray.getFloat(R.styleable.KnobSelector_kAnimationSpeed, animationSpeed);
         animationBounciness = typedArray.getFloat(R.styleable.KnobSelector_kAnimationBounciness, animationBounciness);
 
+        swipeDirection = swipeAttrToInt(typedArray.getString(R.styleable.KnobSelector_kSwipe));
+        swipeSensibilityPixels = typedArray.getInt(R.styleable.KnobSelector_kSwipeSensitivityPixels, swipeSensibilityPixels);
+
         enabled = typedArray.getBoolean(R.styleable.KnobSelector_kEnabled, enabled);
 
         typedArray.recycle();
+    }
+    int swipeAttrToInt(String s) {
+        if (s == null) return 2;
+        if (s.equals("0")) return 0;
+        else if (s.equals("1")) return 1;  // vertical
+        else if (s.equals("2")) return 2; // default  - horizontal
+        else return 2;
     }
 
     void initListeners() {
@@ -275,6 +289,59 @@ public class Knob extends View {
             @Override
             public void onClick(View view) {
                 toggle(animation);
+            }
+        });
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (swipeDirection == 0) return false;
+                int action = motionEvent.getAction();
+                if (swipeDirection == 1) {  // vertical
+                    int y = (int) motionEvent.getY();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        swipeY = y;
+                    }
+                    else if (action == MotionEvent.ACTION_MOVE) {
+                        if (y - swipeY > swipeSensibilityPixels) {
+                            swipeY = y;
+                            decreaseValue();
+                            return true;
+                        }
+                        else if (swipeY - y > swipeSensibilityPixels) {
+                            swipeY = y;
+                            increaseValue();
+                            return true;
+                        }
+                    }
+                    else if (action == MotionEvent.ACTION_UP) {
+                        return true;
+                    }
+                    return false;
+                }
+                else if (swipeDirection == 2) {  // horizontal
+                    int x = (int) motionEvent.getX();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        swipeX = x;
+                    }
+                    else if (action == MotionEvent.ACTION_MOVE) {
+                        if (x - swipeX > swipeSensibilityPixels) {
+                            swipeX = x;
+                            increaseValue();
+                            return true;
+                        }
+                        else if (swipeX - x > swipeSensibilityPixels) {
+                            swipeX = x;
+                            decreaseValue();
+                            return true;
+                        }
+                    }
+                    else if (action == MotionEvent.ACTION_UP) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                return false;
             }
         });
         spring.addListener(new SimpleSpringListener(){
@@ -295,15 +362,27 @@ public class Knob extends View {
     // behaviour
 
     public void toggle(boolean animate) {
-        previousState = currentState;
-        currentState = (currentState+1); // % numberOfStates;
-        if(listener != null) listener.onState(currentState % numberOfStates);
-        takeEffect(animate);
+        increaseValue(animate);
     }
     public void toggle() {
         toggle(animation);
     }
 
+    public void increaseValue(boolean animate) {
+        previousState = currentState;
+        currentState = (currentState+1); // % numberOfStates;
+        if(listener != null) listener.onState(currentState % numberOfStates);
+        takeEffect(animate);
+    }
+    public void increaseValue() { increaseValue(animation);}
+
+    public void decreaseValue(boolean animate) {
+        previousState = currentState;
+        currentState = (currentState-1); // % numberOfStates;
+        if(listener != null) listener.onState(currentState % numberOfStates);
+        takeEffect(animate);
+    }
+    public void decreaseValue() { decreaseValue(animation);}
 
     private void takeEffect(boolean animate) {
         if (animate) {
@@ -343,7 +422,9 @@ public class Knob extends View {
         takeEffect(animate);
     }
     public int getState() {
-        return currentState % numberOfStates;
+        int state = currentState % numberOfStates;
+        if (state < 0) state += numberOfStates;
+        return state;
     }
 
     // getters and setters
