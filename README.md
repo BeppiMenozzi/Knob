@@ -105,12 +105,20 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <br><br>
 * <b>kBorderWidth</b> Width of the external circle. 0 = disable.
 * <b>kBorderColor</b> Color of the external circle.
+<br><br>
+* <b>kSwipe</b> Enable swipe. Values: off, vertical horizontal (default: horizontal).
+* <b>kSwipeSensitivityPixels</b> How many pixels are needed for the swipe makes the knob increase value. Higher = slower (default: 100).
+
+
+### New in 1.1.0
+* Added swipe gestures
+* Added methods <b>increaseValue()</b> <b>decreaseValue()</b>
+* Fixed small things.
 
 
 ### (Still long) TODO List
 * assign a drawable to the knob and to the center, choose if it can be rotated or not
 * draw important markers (for example, every 5)
-* implement gestures
 * allow to configure values packed on an arc, rather then on the whole circumference
 * allow to put multiple indicators
 * make better management of the transition between max value and min value
