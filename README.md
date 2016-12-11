@@ -8,7 +8,8 @@ The knob is a very powerful tool, that I could not find in the Android panorama:
 * The value is graphically displayed as well as the number of possible choices
 * It occupies a very small space
 * It can manage any number of values without requiring more space
-* It can change the number of possible values without any mess
+* It can adapt itself when the number of possible values changes
+* Using swipe gestures it allows to change values very quickly
 <br><br>
 Possible usages are:
 * Replacement for a radio button
