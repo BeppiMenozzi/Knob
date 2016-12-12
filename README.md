@@ -35,7 +35,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.1.0'
+        compile 'com.github.BeppiMenozzi:Knob:1.1.1'
         ...
     }
 
