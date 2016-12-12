@@ -35,6 +35,7 @@
             <enum name="horizontal" value="2"/>
         </attr>
         <attr name="kSwipeSensitivityPixels" format="integer" />
+<!-- swipe attrs do not currently have their own programmatic methods -->
 
         <attr name="kEnabled" format="boolean"/>
     </declare-styleable>

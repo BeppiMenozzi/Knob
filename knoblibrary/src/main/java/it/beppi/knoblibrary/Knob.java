@@ -203,7 +203,8 @@ public class Knob extends View {
     private float stateMarkersRelativeLength = 0.08f;
     private int swipeDirection = 2;
     private int swipeSensibilityPixels = 100;
-    private int swipeX=0, swipeY=0;
+    private int swipeX=0, swipeY=0;  // used for swipe management
+    boolean swipeing = false;        // used for swipe / click management
 
 
     // initialize
@@ -285,35 +286,41 @@ public class Knob extends View {
     }
 
     void initListeners() {
+
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle(animation);
             }
         });
+
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (swipeDirection == 0) return false;
+                if (swipeDirection == 0) { toggle(animation); return false; }
                 int action = motionEvent.getAction();
                 if (swipeDirection == 1) {  // vertical
                     int y = (int) motionEvent.getY();
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeY = y;
+                        swipeing = false;
                     }
                     else if (action == MotionEvent.ACTION_MOVE) {
                         if (y - swipeY > swipeSensibilityPixels) {
                             swipeY = y;
+                            swipeing = true;
                             decreaseValue();
                             return true;
                         }
                         else if (swipeY - y > swipeSensibilityPixels) {
                             swipeY = y;
+                            swipeing = true;
                             increaseValue();
                             return true;
                         }
                     }
                     else if (action == MotionEvent.ACTION_UP) {
+                        if (!swipeing) toggle(animation);    // click
                         return true;
                     }
                     return false;
@@ -322,20 +329,24 @@ public class Knob extends View {
                     int x = (int) motionEvent.getX();
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeX = x;
+                        swipeing = false;
                     }
                     else if (action == MotionEvent.ACTION_MOVE) {
                         if (x - swipeX > swipeSensibilityPixels) {
                             swipeX = x;
+                            swipeing = true;
                             increaseValue();
                             return true;
                         }
                         else if (swipeX - x > swipeSensibilityPixels) {
                             swipeX = x;
+                            swipeing = true;
                             decreaseValue();
                             return true;
                         }
                     }
                     else if (action == MotionEvent.ACTION_UP) {
+                        if (!swipeing) toggle(animation);    // click
                         return true;
                     }
                     return false;
