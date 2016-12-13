@@ -18,7 +18,7 @@ Possible usages are:
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
 
-<img src="ezgif.com-ec0277b0a0.gif"><br>
+<img src="ezgif.com-ec5e6d149d.gif"><br>
 
 ### Setup
 In your project's build.gradle file:
@@ -35,7 +35,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.1.1'
+        compile 'com.github.BeppiMenozzi:Knob:1.2.0'
         ...
     }
 
@@ -65,6 +65,8 @@ Listener:
         });
 
     ...
+
+<img src="ezgif.com-ec0277b0a0.gif"><br>
 
 ### Graphical structure
 The Knob is completely customizable. The many customizable attributes can all be set both via xml file, and programmatically.<br><br>
