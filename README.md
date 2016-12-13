@@ -1,4 +1,4 @@
-# Rotating Knob Selector
+# Rotary Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
 <img src="ezgif.com-5943f47a71.gif"><br>
