@@ -1,8 +1,9 @@
 # Rotating Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
-<img src="ezgif.com-b175d4980a.gif"><br><br>
-The knob is a very powerful tool, that I could not find in the Android panorama:
+<img src="ezgif.com-ec5e6d149d.gif"><br>
+The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
+But the rotating knob has a lot of advantages over other radio-buttons or selectors:
 
 * Existing also in the physical world, it's usage is immediately clear to the user
 * The value is graphically displayed as well as the number of possible choices
@@ -18,7 +19,7 @@ Possible usages are:
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
 
-<img src="ezgif.com-ec5e6d149d.gif"><br>
+<img src="ezgif.com-b175d4980a.gif"><br><br>
 
 ### Setup
 In your project's build.gradle file:
