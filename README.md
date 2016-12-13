@@ -5,17 +5,16 @@ A customizable selector that replicates the behaviour of a knob with discrete va
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
 But the rotating knob has a lot of advantages over other radio-buttons or selectors:
 
-* Existing also in the physical world, it's usage is immediately clear to the user
-* The value is graphically displayed as well as the number of possible choices
-* It occupies a very small space
-* It can manage any number of values without requiring more space
-* It can adapt itself when the number of possible values changes
+* It's usage is immediately clear to the user, because it also exists in the physical world.
+* The current value is graphically displayed as well as the number of possible choices
+* It needs a very small space
+* It can manage any number of choices without requiring additional space, and it can adapt itself when the number changes
 * Using swipe gestures it allows to change values very quickly
 <br><br>
 Possible usages are:
-* Replacement for a radio button
-* Replacement for a numeric value input
-* Replacement for a ViewPager indicator
+* Replacement for a radio button, with 3 up to dozen of choices
+* Replacement for a integer value input, with large ranges up to hundreds
+* Replacement for a ViewPager indicator, for fast scrolling pages without using an entire line of the screen
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
 
