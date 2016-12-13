@@ -66,6 +66,8 @@ Listener:
     ...
 
 <img src="ezgif.com-ec0277b0a0.gif"><br>
+This is what you will have with this default configuration. Please grab graphics and configurations from the sample as you like to match your own needs.
+
 
 ### Graphical structure
 The Knob is completely customizable. The many customizable attributes can all be set both via xml file, and programmatically.<br><br>
@@ -121,6 +123,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
 </table>
+
+### New in 1.2.2
+* Added samples
 
 ### New in 1.2.1
 * Added continuous mode
