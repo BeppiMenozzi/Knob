@@ -27,6 +27,7 @@
         <attr name="kStateMarkersColor" format="reference|color"/>
         <attr name="kStateMarkersRelativeLength" format="float"/>
         <attr name="kSelectedStateMarkerColor" format="reference|color"/>
+        <attr name="kSelectedStateMarkerContinuous" format="boolean"/>
 
         <attr name="kAnimation" format="boolean"/>
         <attr name="kAnimationSpeed" format="float"/>

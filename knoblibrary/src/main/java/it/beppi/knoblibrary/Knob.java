@@ -194,8 +194,10 @@ public class Knob extends View {
         if ((stateMarkersRelativeLength == 0 || stateMarkersWidth == 0) && (stateMarkersAccentRelativeLength == 0 || stateMarkersAccentWidth == 0)) return;
         for (int w=0; w<numberOfStates; w++) {
             boolean big = false;
+            boolean selected = false;
             if (stateMarkersAccentPeriodicity != 0)
                 big = (w % stateMarkersAccentPeriodicity == 0);
+            selected = (w == actualState || (w <= actualState && selectedStateMarkerContinuous));
 
             paint.setStrokeWidth(big ? stateMarkersAccentWidth : stateMarkersWidth);
             double angle = calcAngle(w);
@@ -203,7 +205,7 @@ public class Knob extends View {
             float startY = centerY + (float) (externalRadius * (1 - (big ? stateMarkersAccentRelativeLength : stateMarkersRelativeLength)) * Math.cos(angle));
             float endX = centerX + (float) (externalRadius * Math.sin(angle));
             float endY = centerY + (float) (externalRadius * Math.cos(angle));
-            paint.setColor(w == actualState ? selectedStateMarkerColor : (big ? stateMarkersAccentColor : stateMarkersColor));
+            paint.setColor(selected ? selectedStateMarkerColor : (big ? stateMarkersAccentColor : stateMarkersColor));
             canvas.drawLine(startX, startY, endX, endY, paint);
         }
     }
@@ -232,6 +234,7 @@ public class Knob extends View {
     private int stateMarkersWidth = 2;
     private int stateMarkersColor = Color.BLACK;
     private int selectedStateMarkerColor = Color.YELLOW;
+    private boolean selectedStateMarkerContinuous = false;
     private float stateMarkersRelativeLength = 0.06f;
     private int swipeDirection = 2;
     private int swipeSensibilityPixels = 100;
@@ -317,6 +320,7 @@ public class Knob extends View {
         stateMarkersColor = typedArray.getColor(R.styleable.KnobSelector_kStateMarkersColor, stateMarkersColor);
         selectedStateMarkerColor = typedArray.getColor(R.styleable.KnobSelector_kSelectedStateMarkerColor, selectedStateMarkerColor);
         stateMarkersRelativeLength = typedArray.getFloat(R.styleable.KnobSelector_kStateMarkersRelativeLength, stateMarkersRelativeLength);
+        selectedStateMarkerContinuous = typedArray.getBoolean(R.styleable.KnobSelector_kSelectedStateMarkerContinuous, selectedStateMarkerContinuous);
 
         animation = typedArray.getBoolean(R.styleable.KnobSelector_kAnimation, animation);
         animationSpeed = typedArray.getFloat(R.styleable.KnobSelector_kAnimationSpeed, animationSpeed);
@@ -351,6 +355,7 @@ public class Knob extends View {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!enabled) return;
                 toggle(animation);
             }
         });
@@ -358,6 +363,7 @@ public class Knob extends View {
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (!enabled) return false;
                 if (swipeDirection == 0) { toggle(animation); return false; }
                 int action = motionEvent.getAction();
                 if (swipeDirection == 1) {  // vertical
@@ -769,4 +775,75 @@ public class Knob extends View {
         takeEffect(animation);
     }
 
+    public float getCircularIndicatorRelativeRadius() {
+        return circularIndicatorRelativeRadius;
+    }
+
+    public void setCircularIndicatorRelativeRadius(float circularIndicatorRelativeRadius) {
+        this.circularIndicatorRelativeRadius = circularIndicatorRelativeRadius;
+        takeEffect(animation);
+    }
+
+    public float getCircularIndicatorRelativePosition() {
+        return circularIndicatorRelativePosition;
+    }
+
+    public void setCircularIndicatorRelativePosition(float circularIndicatorRelativePosition) {
+        this.circularIndicatorRelativePosition = circularIndicatorRelativePosition;
+        takeEffect(animation);
+    }
+
+    public int getCircularIndicatorColor() {
+        return circularIndicatorColor;
+    }
+
+    public void setCircularIndicatorColor(int circularIndicatorColor) {
+        this.circularIndicatorColor = circularIndicatorColor;
+        takeEffect(animation);
+    }
+
+    public boolean isSelectedStateMarkerContinuous() {
+        return selectedStateMarkerContinuous;
+    }
+
+    public void setSelectedStateMarkerContinuous(boolean selectedStateMarkerContinuous) {
+        this.selectedStateMarkerContinuous = selectedStateMarkerContinuous;
+        takeEffect(animation);
+    }
+
+    public float getMinAngle() {
+        return minAngle;
+    }
+
+    public void setMinAngle(float minAngle) {
+        this.minAngle = minAngle;
+        takeEffect(animation);
+    }
+
+    public float getMaxAngle() {
+        return maxAngle;
+    }
+
+    public void setMaxAngle(float maxAngle) {
+        this.maxAngle = maxAngle;
+        takeEffect(animation);
+    }
+
+    public float getExternalRadius() {
+        return externalRadius;
+    }
+
+    public void setExternalRadius(float externalRadius) {
+        this.externalRadius = externalRadius;
+        takeEffect(animation);
+    }
+
+    public Drawable getKnobDrawable() {
+        return knobDrawable;
+    }
+
+    public void setKnobDrawable(Drawable knobDrawable) {
+        this.knobDrawable = knobDrawable;
+        takeEffect(animation);
+    }
 }

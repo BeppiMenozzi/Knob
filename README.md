@@ -1,7 +1,7 @@
 # Rotating Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
-<img src="ezgif.com-ec5e6d149d.gif"><br>
+<img src="ezgif.com-5943f47a71.gif"><br>
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
 But the rotating knob has a lot of advantages over other radio-buttons or selectors:
 
@@ -36,7 +36,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.2.0'
+        compile 'com.github.BeppiMenozzi:Knob:1.2.1'
         ...
     }
 
@@ -103,6 +103,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kStateMarkersRelativeLength</b></td><td>Length of the line markers, relative to the largest possible circle inside the view. 1 = draw from edge to center, 0.5 = draw half length, starting from the edge.</td></tr>
 <tr><td><b>kStateMarkersColor</b></td><td>Color of the line markers.</td></tr>
 <tr><td><b>kSelectedStateMarkerColor</b></td><td>Color of the selected line marker.</td></tr>
+<tr><td><b>kSelectedStateMarkerContinuous</b></td><td>If the continuous mode is chosen, the selected markers will be all from minimum to current value, instead of only one.</td></tr>
 <tr><td><b>kStateMarkersAccentWidth</b></td><td>These attributes allow to create different "more important" markers, like on a normal clock are the minutes divisible by 5</td></tr>
 <tr><td><b>kStateMarkersAccentColor</b></td></tr>
 <tr><td><b>kStateMarkersAccentRelativeLength</b></td></tr>
@@ -122,6 +123,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
 </table>
+
+### New in 1.2.1
+* Added continuous mode
 
 ### New in 1.2.0
 * Added constrained rotation
