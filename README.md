@@ -6,15 +6,13 @@ The knob is a powerful tool. For some reason, anyway, it's rarely used, and I co
 But the rotating knob has a lot of advantages over other radio-buttons, seek bars or other selectors:
 
 * It's usage is immediately clear to the user, because it also exists in the physical world
-* It has an immediate graphical display of the current value, the number of choices and where the value is in the overall range
-* It docks in a very small space
-* It requires the same space no matter how many choices are there, and it can adapt itself when the number of choices changes
-* Using swipe gestures it allows to change values very quickly
-* Works fine also with few choices, as a multi-state toggle:
+* It has an immediate graphical indication of the current value, the number of choices and where the value is in the overall range
+* It docks in a very small space: it requires the same space no matter how many choices are there, and it can adapt itself when the amount changes. Furthermore, swipe gestures allow to change values very quickly, using the entire screen for the gesture, but only a tiny zone of it for the graphics.
+* Works fine also with few choices, as a multi-state toggle.
 <br><br>
 Possible usages are:
-* Replacement for a radio button, with 3 up to dozen of choices
-* Replacement for a integer value input, with large ranges up to hundreds
+* Replacement for a radio button, with 2 up to dozen of choices
+* Replacement for a integer value input or seek bar, with large ranges up to hundreds
 * Replacement for a ViewPager indicator, for fast scrolling pages without using an entire line of the screen
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
