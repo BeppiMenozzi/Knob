@@ -10,6 +10,7 @@ But the rotating knob has a lot of advantages over other radio-buttons or select
 * It docks in a very small space
 * It requires the same space no matter how many choices are there, and it can adapt itself when the number of choices changes
 * Using swipe gestures it allows to change values very quickly
+* Works fine both with few choices, and with a large range of possible inputs
 <br><br>
 Possible usages are:
 * Replacement for a radio button, with 3 up to dozen of choices
