@@ -3,14 +3,14 @@
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
 <img src="ezgif.com-5943f47a71.gif"><br>
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
-But the rotating knob has a lot of advantages over other radio-buttons or selectors:
+But the rotating knob has a lot of advantages over other radio-buttons, seek bars or other selectors:
 
 * It's usage is immediately clear to the user, because it also exists in the physical world
 * It has an immediate graphical display of the current value, the number of choices and where the value is in the overall range
 * It docks in a very small space
 * It requires the same space no matter how many choices are there, and it can adapt itself when the number of choices changes
 * Using swipe gestures it allows to change values very quickly
-* Works fine both with few choices, and with a large range of possible inputs
+* Works fine also with few choices, as a multi-state toggle:
 <br><br>
 Possible usages are:
 * Replacement for a radio button, with 3 up to dozen of choices
