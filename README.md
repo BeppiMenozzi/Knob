@@ -143,9 +143,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 * Fixed small things.
 
 
-### (Still long) TODO List
-* allow to put multiple indicators
-
+### TODO List
+* Allow to put multiple indicators
+* Popup balloons with values
 
 Author
 -------
