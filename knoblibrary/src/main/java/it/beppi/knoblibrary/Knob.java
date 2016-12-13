@@ -184,6 +184,7 @@ public class Knob extends View {
         if (circularIndicatorRelativeRadius == 0.0f) return;
         paint.setColor(circularIndicatorColor);
         paint.setStrokeWidth(0);
+        paint.setStyle(Paint.Style.FILL);
 
         float posX = centerX + (float)(externalRadius * circularIndicatorRelativePosition * Math.sin(currentAngle));
         float posY = centerY + (float)(externalRadius * circularIndicatorRelativePosition * Math.cos(currentAngle));

@@ -87,12 +87,13 @@
                 app:kBorderColor="@color/grey_800"
                 app:kAnimationSpeed="1"
                 app:kAnimationBounciness="3"
+                app:kSwipeSensitivityPixels="30"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="Fixed drawable with constraints"
+                android:text="Potentiometer"
                 android:gravity="center"
                 />
 
@@ -124,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="Rotating drawable"
+                android:text="Infinite knob"
                 android:gravity="center"
                 />
 
@@ -157,17 +158,54 @@
                 app:kBorderWidth="0dp"
                 app:kAnimationSpeed="10"
                 app:kAnimationBounciness="20"
+                app:kSwipeSensitivityPixels="30"
+                app:kSwipe="vertical"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="State markers continuous"
+                android:text="Volume knob"
                 android:gravity="center"
                 />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <it.beppi.knoblibrary.Knob
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:kNumberOfStates="7"
+                app:kFreeRotation="true"
+                app:kKnobDrawable="@drawable/knob4"
+                app:kKnobDrawableRotates="false"
+                app:kCircularIndicatorRelativeRadius="0.1"
+                app:kCircularIndicatorRelativePosition="0.36"
+                app:kCircularIndicatorColor="@color/black"
+                app:kIndicatorRelativeLength="0.5"
+                app:kIndicatorWidth="5dp"
+                app:kIndicatorColor="@color/transparent_700"
+                app:kStateMarkersWidth="5dp"
+                app:kStateMarkersRelativeLength="0.2"
+                app:kStateMarkersColor="@color/transparent"
+                app:kSelectedStateMarkerColor="@color/black"
+                app:kBorderWidth="2dp"
+                app:kAnimationSpeed="20"
+                app:kAnimationBounciness="5"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="Multi state toggle"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
