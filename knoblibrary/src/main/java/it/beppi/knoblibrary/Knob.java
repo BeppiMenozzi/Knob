@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -107,9 +108,21 @@ public class Knob extends View {
     }
 
     void paintKnob(Canvas canvas) {
-        paint.setColor(knobColor);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(centerX, centerY, knobRadius, paint);
+        if (knobDrawableRes != 0 && knobDrawable != null) {
+            knobDrawable.setBounds((int)(centerX-knobRadius), (int)(centerY-knobRadius), (int)(centerX+knobRadius), (int)(centerY+knobRadius));
+            if (knobDrawableRotates) {
+                canvas.save();
+                canvas.rotate((float)-Math.toDegrees(Math.PI + currentAngle), centerX, centerY);
+                knobDrawable.draw(canvas);
+                canvas.restore();
+            }
+            else
+                knobDrawable.draw(canvas);
+        } else {
+            paint.setColor(knobColor);
+            paint.setStyle(Paint.Style.FILL);
+            canvas.drawCircle(centerX, centerY, knobRadius, paint);
+        }
     }
 
     void paintKnobBorder(Canvas canvas) {
@@ -121,23 +134,37 @@ public class Knob extends View {
     }
 
     void paintKnobCenter(Canvas canvas) {
+        if (knobDrawableRes != 0 && knobDrawable != null) return;
         if (knobCenterRelativeRadius == 0f) return;
         paint.setColor(knobCenterColor);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(centerX, centerY, knobCenterRelativeRadius * knobRadius, paint);
     }
 
-    double calcAngle(int position) {
-        return Math.PI - position * (2 * Math.PI / numberOfStates);
+    double normalizeAngle(double angle) {
+        while (angle < 0) angle += Math.PI*2;
+        while (angle >= Math.PI*2) angle -= Math.PI*2;
+        return angle;
     }
 
-    double calcAngleWithDirection(int position) {
-      double angle = calcAngle(position);
-        double angle0 = spring.getCurrentValue();
-        double diff1 = Math.abs(angle0 - angle);
-        double diff2 = Math.abs(angle - 2 * Math.PI - angle0);
+    double calcAngle(int position) {
+        double min = Math.toRadians((double)minAngle);
+        double max = Math.toRadians((double)maxAngle - 0.0001);
+        double range = max - min;
+        return normalizeAngle(Math.PI - min - position * (range / numberOfStates));
 
-        if (diff1<diff2) return angle; else return angle - 2 * Math.PI;
+        // return Math.PI - position * (2 * Math.PI / numberOfStates);
+    }
+
+    void setIndicatorAngleWithDirection() {
+        double angleCurr = normalizeAngle(spring.getCurrentValue());
+        double angleNew = calcAngle(actualState);
+        if (freeRotation) {
+            if (angleCurr > angleNew && angleCurr - angleNew > Math.PI) angleNew += Math.PI * 2;
+            else if (angleCurr < angleNew && angleNew - angleCurr > Math.PI) angleNew -= Math.PI * 2;
+        }
+        spring.setCurrentValue(angleCurr);
+        spring.setEndValue(angleNew);
     }
 
     void paintIndicator(Canvas canvas) {
@@ -164,15 +191,19 @@ public class Knob extends View {
     }
 
     void paintMarkers(Canvas canvas) {
-        paint.setStrokeWidth(stateMarkersWidth);
-        int currentStateModded = currentState % numberOfStates;
+        if ((stateMarkersRelativeLength == 0 || stateMarkersWidth == 0) && (stateMarkersAccentRelativeLength == 0 || stateMarkersAccentWidth == 0)) return;
         for (int w=0; w<numberOfStates; w++) {
+            boolean big = false;
+            if (stateMarkersAccentPeriodicity != 0)
+                big = (w % stateMarkersAccentPeriodicity == 0);
+
+            paint.setStrokeWidth(big ? stateMarkersAccentWidth : stateMarkersWidth);
             double angle = calcAngle(w);
-            float startX = centerX + (float)(externalRadius * (1-stateMarkersRelativeLength) * Math.sin(angle));
-            float startY = centerY + (float)(externalRadius * (1-stateMarkersRelativeLength) * Math.cos(angle));
-            float endX = centerX + (float)(externalRadius * Math.sin(angle));
-            float endY = centerY + (float)(externalRadius * Math.cos(angle));
-            paint.setColor(w==currentStateModded ? selectedStateMarkerColor : stateMarkersColor);
+            float startX = centerX + (float) (externalRadius * (1 - (big ? stateMarkersAccentRelativeLength : stateMarkersRelativeLength)) * Math.sin(angle));
+            float startY = centerY + (float) (externalRadius * (1 - (big ? stateMarkersAccentRelativeLength : stateMarkersRelativeLength)) * Math.cos(angle));
+            float endX = centerX + (float) (externalRadius * Math.sin(angle));
+            float endY = centerY + (float) (externalRadius * Math.cos(angle));
+            paint.setColor(w == actualState ? selectedStateMarkerColor : (big ? stateMarkersAccentColor : stateMarkersColor));
             canvas.drawLine(startX, startY, endX, endY, paint);
         }
     }
@@ -193,18 +224,28 @@ public class Knob extends View {
     private float knobCenterRelativeRadius = 0.45f;
     private int knobCenterColor = Color.DKGRAY;
     private boolean enabled = true;
-    private int currentState = defaultState;
+    private int currentState = defaultState; // can be negative and override expected limits
+    private int actualState = currentState; // currentState, modded to the expected limits
     private boolean animation = true;
-    private float animationSpeed = 8;
-    private float animationBounciness = 10;
-    private int stateMarkersWidth = 3;
+    private float animationSpeed = 10;
+    private float animationBounciness = 40;
+    private int stateMarkersWidth = 2;
     private int stateMarkersColor = Color.BLACK;
     private int selectedStateMarkerColor = Color.YELLOW;
-    private float stateMarkersRelativeLength = 0.08f;
+    private float stateMarkersRelativeLength = 0.06f;
     private int swipeDirection = 2;
     private int swipeSensibilityPixels = 100;
     private int swipeX=0, swipeY=0;  // used for swipe management
     boolean swipeing = false;        // used for swipe / click management
+    private boolean freeRotation = true;
+    private float minAngle = 0f;
+    private float maxAngle = 360f;
+    private int stateMarkersAccentWidth = 3;
+    private int stateMarkersAccentColor = Color.BLACK;
+    private float stateMarkersAccentRelativeLength = 0.11f;
+    private int stateMarkersAccentPeriodicity = 0;  // 0 = off
+    private int knobDrawableRes = 0;
+    private boolean knobDrawableRotates = true;
 
 
     // initialize
@@ -213,6 +254,7 @@ public class Knob extends View {
         ctx = getContext();
         loadAttributes(attrs);
         initTools();
+        initDrawables();
         initListeners();
         initStatus();
     }
@@ -224,7 +266,8 @@ public class Knob extends View {
     Spring spring;
     private double currentAngle;
     private int previousState = defaultState;
-
+    private Drawable knobDrawable;
+    private Canvas tempCanvas;
 
     void initTools() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -234,6 +277,12 @@ public class Knob extends View {
         spring = springSystem.createSpring();
         spring.setSpringConfig(SpringConfig.fromBouncinessAndSpeed((double)animationSpeed, (double)animationBounciness));
         spring.setOvershootClampingEnabled(false);
+    }
+
+    void initDrawables() {
+        if (knobDrawableRes != 0) {
+            knobDrawable = getResources().getDrawable(knobDrawableRes);
+        }
     }
 
     void loadAttributes(AttributeSet attrs) {
@@ -260,6 +309,9 @@ public class Knob extends View {
 
         knobCenterRelativeRadius = typedArray.getFloat(R.styleable.KnobSelector_kKnobCenterRelativeRadius, knobCenterRelativeRadius);
         knobCenterColor = typedArray.getColor(R.styleable.KnobSelector_kKnobCenterColor, knobCenterColor);
+        
+        knobDrawableRes = typedArray.getResourceId(R.styleable.KnobSelector_kKnobDrawable, knobDrawableRes);
+        knobDrawableRotates = typedArray.getBoolean(R.styleable.KnobSelector_kKnobDrawableRotates, knobDrawableRotates);
 
         stateMarkersWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kStateMarkersWidth, stateMarkersWidth);
         stateMarkersColor = typedArray.getColor(R.styleable.KnobSelector_kStateMarkersColor, stateMarkersColor);
@@ -272,6 +324,15 @@ public class Knob extends View {
 
         swipeDirection = swipeAttrToInt(typedArray.getString(R.styleable.KnobSelector_kSwipe));
         swipeSensibilityPixels = typedArray.getInt(R.styleable.KnobSelector_kSwipeSensitivityPixels, swipeSensibilityPixels);
+
+        freeRotation = typedArray.getBoolean(R.styleable.KnobSelector_kFreeRotation, freeRotation);
+        minAngle = typedArray.getFloat(R.styleable.KnobSelector_kMinAngle, minAngle);
+        maxAngle = typedArray.getFloat(R.styleable.KnobSelector_kMaxAngle, maxAngle);
+
+        stateMarkersAccentWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kStateMarkersAccentWidth, stateMarkersAccentWidth);
+        stateMarkersAccentColor = typedArray.getColor(R.styleable.KnobSelector_kStateMarkersAccentColor, stateMarkersAccentColor);
+        stateMarkersAccentRelativeLength = typedArray.getFloat(R.styleable.KnobSelector_kStateMarkersAccentRelativeLength, stateMarkersAccentRelativeLength);
+        stateMarkersAccentPeriodicity = typedArray.getInt(R.styleable.KnobSelector_kStateMarkersAccentPeriodicity, stateMarkersAccentPeriodicity);
 
         enabled = typedArray.getBoolean(R.styleable.KnobSelector_kEnabled, enabled);
 
@@ -366,6 +427,7 @@ public class Knob extends View {
     void initStatus() {
         currentState = defaultState;
         previousState = defaultState;
+        calcActualState();
         currentAngle = calcAngle(currentState);
         spring.setCurrentValue(currentAngle);
     }
@@ -379,10 +441,17 @@ public class Knob extends View {
         toggle(animation);
     }
 
+    private void calcActualState() {
+        actualState = currentState % numberOfStates;
+        if (actualState < 0) actualState += numberOfStates;
+    }
+
     public void increaseValue(boolean animate) {
         previousState = currentState;
         currentState = (currentState+1); // % numberOfStates;
-        if(listener != null) listener.onState(currentState % numberOfStates);
+        if (!freeRotation && currentState >= numberOfStates) currentState = numberOfStates-1;
+        calcActualState();
+        if(listener != null) listener.onState(actualState);
         takeEffect(animate);
     }
     public void increaseValue() { increaseValue(animation);}
@@ -390,16 +459,18 @@ public class Knob extends View {
     public void decreaseValue(boolean animate) {
         previousState = currentState;
         currentState = (currentState-1); // % numberOfStates;
-        if(listener != null) listener.onState(currentState % numberOfStates);
+        if (!freeRotation && currentState<0) currentState = 0;
+        calcActualState();
+        if(listener != null) listener.onState(actualState);
         takeEffect(animate);
     }
     public void decreaseValue() { decreaseValue(animation);}
 
     private void takeEffect(boolean animate) {
         if (animate) {
-            spring.setEndValue(calcAngleWithDirection(currentState));
+            setIndicatorAngleWithDirection();
         } else {
-            spring.setCurrentValue(calcAngle(currentState));
+            spring.setCurrentValue(calcAngle(actualState));
         }
         postInvalidate();
     }
@@ -430,12 +501,11 @@ public class Knob extends View {
     public void forceState(int newState, boolean animate) {
         previousState = currentState;
         currentState = newState;
+        calcActualState();
         takeEffect(animate);
     }
     public int getState() {
-        int state = currentState % numberOfStates;
-        if (state < 0) state += numberOfStates;
-        return state;
+        return actualState;
     }
 
     // getters and setters
@@ -620,4 +690,83 @@ public class Knob extends View {
         this.knobRadius = knobRadius;
         takeEffect(animation);
     }
+
+    public boolean isFreeRotation() {
+        return freeRotation;
+    }
+
+    public void setFreeRotation(boolean freeRotation) {
+        this.freeRotation = freeRotation;
+    }
+
+    public int getSwipeDirection() {
+        return swipeDirection;
+    }
+
+    public void setSwipeDirection(int swipeDirection) {
+        this.swipeDirection = swipeDirection;
+    }
+
+    public int getSwipeSensibilityPixels() {
+        return swipeSensibilityPixels;
+    }
+
+    public void setSwipeSensibilityPixels(int swipeSensibilityPixels) {
+        this.swipeSensibilityPixels = swipeSensibilityPixels;
+    }
+
+    public int getStateMarkersAccentWidth() {
+        return stateMarkersAccentWidth;
+    }
+
+    public void setStateMarkersAccentWidth(int stateMarkersAccentWidth) {
+        this.stateMarkersAccentWidth = stateMarkersAccentWidth;
+        takeEffect(animation);
+    }
+
+    public int getStateMarkersAccentColor() {
+        return stateMarkersAccentColor;
+    }
+
+    public void setStateMarkersAccentColor(int stateMarkersAccentColor) {
+        this.stateMarkersAccentColor = stateMarkersAccentColor;
+        takeEffect(animation);
+    }
+
+    public float getStateMarkersAccentRelativeLength() {
+        return stateMarkersAccentRelativeLength;
+    }
+
+    public void setStateMarkersAccentRelativeLength(float stateMarkersAccentRelativeLength) {
+        this.stateMarkersAccentRelativeLength = stateMarkersAccentRelativeLength;
+        takeEffect(animation);
+    }
+
+    public int getStateMarkersAccentPeriodicity() {
+        return stateMarkersAccentPeriodicity;
+    }
+
+    public void setStateMarkersAccentPeriodicity(int stateMarkersAccentPeriodicity) {
+        this.stateMarkersAccentPeriodicity = stateMarkersAccentPeriodicity;
+        takeEffect(animation);
+    }
+
+    public int getKnobDrawableRes() {
+        return knobDrawableRes;
+    }
+
+    public void setKnobDrawableRes(int knobDrawableRes) {
+        this.knobDrawableRes = knobDrawableRes;
+        takeEffect(animation);
+    }
+
+    public boolean isKnobDrawableRotates() {
+        return knobDrawableRotates;
+    }
+
+    public void setKnobDrawableRotates(boolean knobDrawableRotates) {
+        this.knobDrawableRotates = knobDrawableRotates;
+        takeEffect(animation);
+    }
+
 }

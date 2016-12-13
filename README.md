@@ -77,39 +77,62 @@ Let's analyze the structure to understand how it is drawn before digging into th
 * An empty circle that represents the knob border.<br><br>
 
 ### Customization
-Here is the list of the xml attributes that can be used to customize the View. All these attributes are available programmatically too.
-* <b>kNumberOfStates</b> Number of possible states. States are numbered from 0 to n-1. This number can be changed runtime, and the indicator will adjust its position accordingly.
-* <b>kDefaultState</b> The starting state of the knob.
-* <b>kAnimation</b> Enable / disable indicator's animation.
-* <b>kAnimationSpeed</b> Parameter "speed" applied to the spring physical model for the indicator's animation.
-* <b>kAnimationBounciness</b> Parameter "bounciness" applied to the spring physical model for the indicator's animation.
-* <b>kEnabled</b> Enable / disable knob.
-<br><br>
-* <b>kKnobColor</b> Color of the knob.
-* <b>kKnobRelativeRadius</b> Radius of the knob, relative to the largest possible circle inside the view. 1 = fill all the view, 0.5 = fill half of the view.
-<br><br>
-* <b>kStateMarkersWidth</b> Width of the line markers.
-* <b>kStateMarkersRelativeLength</b> Length of the line markers, relative to the largest possible circle inside the view. 1 = draw from edge to center, 0.5 = draw half length, starting from the edge.
-* <b>kStateMarkersColor</b> Color of the line markers.
-* <b>kSelectedStateMarkerColor</b> Color of the selected line marker.
-<br><br>
-* <b>kIndicatorWidth</b> Width of the line indicator. 0 = disable.
-* <b>kIndicatorColor</b> Color of the line indicator.
-* <b>kIndicatorRelativeLength</b> Length of the line indicator relative to the knob radius. 1 = from edge to center. 0.5 = from edge to half. 0 = disable.
-<br><br>
-* <b>kCircularIndicatorRelativeRadius</b> Radius of the circle indicator, relative to the knob radius. 0 = disable.
-* <b>kCircularIndicatorRelativePosition</b> Distance of the circle indicator from the center, relative to the largest possible circle inside the view. 1 = put on edge, 0.5 = put half way.
-* <b>kCircularIndicatorColor</b> Color of the circular indicator.
-<br><br>
-* <b>kKnobCenterColor</b> Color of the center of the knob.
-* <b>kKnobCenterRedlativeRadius</b> Radius of the center, relative to the radius of the knob. 0 = disable.
-<br><br>
-* <b>kBorderWidth</b> Width of the external circle. 0 = disable.
-* <b>kBorderColor</b> Color of the external circle.
-<br><br>
-* <b>kSwipe</b> Enable swipe. Values: off, vertical horizontal (default: horizontal).
-* <b>kSwipeSensitivityPixels</b> How many pixels are needed for the swipe makes the knob increase value. Higher = slower (default: 100).
+Here is the list of the xml attributes that can be used to customize the View. All these attributes are available programmatically too with the same names.
+<table>
+<tr><td><b>kNumberOfStates</b></td><td>Number of possible states. States are numbered from 0 to n-1. This number can be changed runtime, and the indicator will adjust its position accordingly.</td></tr>
+<tr><td><b>kDefaultState</b></td><td>The starting state of the knob.</td></tr>
+<tr><td><b>kAnimation</b></td><td>Enable / disable indicator's animation.</td></tr>
+<tr><td><b>kAnimationSpeed</b></td><td>Parameter "speed" applied to the spring physical model for the indicator's animation.</td></tr>
+<tr><td><b>kAnimationBounciness</b></td><td>Parameter "bounciness" applied to the spring physical model for the indicator's animation.</td></tr>
+<tr><td><b>kEnabled</b></td><td>Enable / disable knob.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kKnobColor</b></td><td>Color of the knob.</td></tr>
+<tr><td><b>kKnobRelativeRadius</b></td><td>Radius of the knob, relative to the largest possible circle inside the view. 1 = fill all the view, 0.5 = fill half of the view.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kKnobDrawable</b></td><td>Allows to override a color configuration and set a drawable as the knob graphics.</td></tr>
+<tr><td><b>kKnobDrawableRotates</b></td><td>When this is true, the drawable will be rotated accordingly, otherwise it will stay still.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kStateMarkersWidth</b></td><td>Width of the line markers.</td></tr>
+<tr><td><b>kStateMarkersRelativeLength</b></td><td>Length of the line markers, relative to the largest possible circle inside the view. 1 = draw from edge to center, 0.5 = draw half length, starting from the edge.</td></tr>
+<tr><td><b>kStateMarkersColor</b></td><td>Color of the line markers.</td></tr>
+<tr><td><b>kSelectedStateMarkerColor</b></td><td>Color of the selected line marker.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kStateMarkersAccentWidth</b></td><td>These attributes allow to create different "more important" markers, like on a normal clock are the minutes divisible by 5</td></tr>
+<tr><td><b>kStateMarkersAccentColor</b></td></tr>
+<tr><td><b>kStateMarkersAccentRelativeLength</b></td></tr>
+<tr><td><b>kStateMarkersAccentPeriodicity</b></td><td>How often these markers are shown. 0 = disable.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kIndicatorWidth</b></td><td>Width of the line indicator. 0 = disable.</td></tr>
+<tr><td><b>kIndicatorColor</b></td><td>Color of the line indicator.</td></tr>
+<tr><td><b>kIndicatorRelativeLength</b></td><td>Length of the line indicator relative to the knob radius. 1 = from edge to center. 0.5 = from edge to half. 0 = disable.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kCircularIndicatorRelativeRadius</b></td><td>Radius of the circle indicator, relative to the knob radius. 0 = disable.</td></tr>
+<tr><td><b>kCircularIndicatorRelativePosition</b></td><td>Distance of the circle indicator from the center, relative to the largest possible circle inside the view. 1 = put on edge, 0.5 = put half way.</td></tr>
+<tr><td><b>kCircularIndicatorColor</b></td><td>Color of the circular indicator.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kKnobCenterColor</b></td><td>Color of the center of the knob.</td></tr>
+<tr><td><b>kKnobCenterRedlativeRadius</b></td><td>Radius of the center, relative to the radius of the knob. 0 = disable.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kBorderWidth</b></td><td>Width of the external circle. 0 = disable.</td></tr>
+<tr><td><b>kBorderColor</b></td><td>Color of the external circle.</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kSwipe</b></td><td>Enable swipe. Values: off, vertical horizontal (default: horizontal).</td></tr>
+<tr><td><b>kSwipeSensitivityPixels</b></td><td>How many pixels are needed for the swipe makes the knob increase value. Higher = slower (default: 100).</td></tr>
+<tr><td><br><br></td></tr>
+<tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minumim the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
+<tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
+<tr><td><b>kMaxAngle</b></td></tr>
+</table>
 
+### New in 1.2.0
+* Added constrained rotation
+* Added min / max angle
+* Added accented markers
+* Added drawables
+* Rewritten angle management (and rotation direction)
+
+### New in 1.1.1
+* Debug
 
 ### New in 1.1.0
 * Added swipe gestures

@@ -20,6 +20,9 @@
         <attr name="kKnobCenterColor" format="reference|color"/>
         <attr name="kKnobCenterRelativeRadius" format="float"/>
 
+        <attr name="kKnobDrawable" format="integer"/>
+        <attr name="kKnobDrawableRotates" format="boolean"/>
+
         <attr name="kStateMarkersWidth" format="dimension"/>
         <attr name="kStateMarkersColor" format="reference|color"/>
         <attr name="kStateMarkersRelativeLength" format="float"/>
@@ -35,7 +38,15 @@
             <enum name="horizontal" value="2"/>
         </attr>
         <attr name="kSwipeSensitivityPixels" format="integer" />
-<!-- swipe attrs do not currently have their own programmatic methods -->
+
+        <attr name="kFreeRotation" format="boolean" />
+        <attr name="kMinAngle" format="float"/>
+        <attr name="kMaxAngle" format="float"/>
+
+        <attr name="kStateMarkersAccentWidth" format="dimension"/>
+        <attr name="kStateMarkersAccentColor" format="reference|color"/>
+        <attr name="kStateMarkersAccentRelativeLength" format="float"/>
+        <attr name="kStateMarkersAccentPeriodicity" format="integer"/>
 
         <attr name="kEnabled" format="boolean"/>
     </declare-styleable>

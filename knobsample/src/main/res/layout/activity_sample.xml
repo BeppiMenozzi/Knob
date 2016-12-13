@@ -10,6 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/blue_grey_700"
     tools:context="it.beppi.knobselector.SampleActivity">
 
     <LinearLayout
@@ -50,6 +51,119 @@
             android:text="Random Number" />
     </LinearLayout>
 
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Examples of specific features"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <it.beppi.knoblibrary.Knob
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:kNumberOfStates="15"
+                app:kFreeRotation="false"
+                app:kMinAngle="-90.0"
+                app:kMaxAngle="180.0"
+                app:kStateMarkersAccentPeriodicity="3"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="Constaints and accented markers"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <it.beppi.knoblibrary.Knob
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:kNumberOfStates="30"
+                app:kFreeRotation="false"
+                app:kMinAngle="-120.0"
+                app:kMaxAngle="130.0"
+                app:kStateMarkersAccentPeriodicity="5"
+                app:kKnobDrawable="@drawable/knob"
+                app:kKnobDrawableRotates="false"
+                app:kIndicatorWidth="1dp"
+                app:kIndicatorColor="@color/grey_800"
+                app:kIndicatorRelativeLength="0.35"
+                app:kStateMarkersWidth="0.5dp"
+                app:kStateMarkersAccentWidth="0.5dp"
+                app:kBorderColor="@color/grey_800"
+                app:kAnimationSpeed="1"
+                app:kAnimationBounciness="3"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="Fixed drawable"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <it.beppi.knoblibrary.Knob
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:kNumberOfStates="12"
+                app:kFreeRotation="true"
+                app:kKnobDrawable="@drawable/knob2"
+                app:kKnobDrawableRotates="true"
+                app:kIndicatorWidth="0dp"
+                app:kStateMarkersWidth="1dp"
+                app:kStateMarkersRelativeLength="0"
+                app:kSelectedStateMarkerColor="@color/transparent_500"
+                app:kStateMarkersAccentColor="@color/transparent_500"
+                app:kStateMarkersAccentPeriodicity="3"
+                app:kBorderWidth="0dp"
+                app:kAnimationSpeed="0"
+                app:kAnimationBounciness="1"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="Rotating drawable"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fancy examples"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,6 +194,7 @@
             app:kCircularIndicatorRelativeRadius="0.1"
             app:kCircularIndicatorRelativePosition="0.7"
             app:kCircularIndicatorColor="@color/red_500"
+            app:kFreeRotation="true"
             />
 
         <it.beppi.knoblibrary.Knob
@@ -107,8 +222,14 @@
             app:kNumberOfStates="60"
             app:kSelectedStateMarkerColor="@color/grey_500"
             app:kStateMarkersColor="@color/grey_400"
-            app:kStateMarkersRelativeLength="0.15"
-            app:kStateMarkersWidth="1dp" />
+            app:kStateMarkersRelativeLength="0.10"
+            app:kStateMarkersWidth="1dp"
+            app:kFreeRotation="true"
+            app:kStateMarkersAccentWidth="1dp"
+            app:kStateMarkersAccentColor="@color/grey_600"
+            app:kStateMarkersAccentRelativeLength="0.20"
+            app:kStateMarkersAccentPeriodicity="5"
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -136,7 +257,9 @@
                 app:kStateMarkersColor="@color/deep_purple_900"
                 app:kSelectedStateMarkerColor="@color/deep_purple_900"
                 app:kStateMarkersRelativeLength="0.3"
-                app:kStateMarkersWidth="2dp" />
+                app:kStateMarkersWidth="2dp"
+                app:kFreeRotation="true"
+                />
 
             <TextView
                 android:id="@+id/textView4"
@@ -171,6 +294,7 @@
             app:kSelectedStateMarkerColor="@color/transparent"
             app:kStateMarkersColor="@color/amber_400"
             app:kStateMarkersRelativeLength="0.3"
+            app:kFreeRotation="true"
             app:kStateMarkersWidth="3dp" />
 
         <it.beppi.knoblibrary.Knob
@@ -194,10 +318,9 @@
             app:kSelectedStateMarkerColor="@color/blue_400"
             app:kStateMarkersColor="@color/blue_300"
             app:kStateMarkersRelativeLength="0.7"
+            app:kFreeRotation="true"
             app:kStateMarkersWidth="3dp" />
-
     </LinearLayout>
-
 
 </LinearLayout>
 
