@@ -17,8 +17,6 @@ Possible usages are:
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
 
-<img src="ezgif.com-b175d4980a.gif"><br><br>
-
 ### Setup
 In your project's build.gradle file:
 
@@ -65,8 +63,12 @@ Listener:
 
     ...
 
-<img src="ezgif.com-ec0277b0a0.gif"><br>
+<br>
+<img src="ezgif.com-b175d4980a.gif"><br>
+
 This is what you will have with this default configuration. Please grab graphics and configurations from the sample as you like to match your own needs.
+<br><br>Some other fancy configurations that you can find in the sample:<br>
+<img src="ezgif.com-ec0277b0a0.gif"><br>
 
 
 ### Graphical structure
