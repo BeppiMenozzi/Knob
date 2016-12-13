@@ -91,8 +91,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><br><br></td></tr>
 <tr><td><b>kKnobColor</b></td><td>Color of the knob.</td></tr>
 <tr><td><b>kKnobRelativeRadius</b></td><td>Radius of the knob, relative to the largest possible circle inside the view. 1 = fill all the view, 0.5 = fill half of the view.</td></tr>
-<tr><td><br><br></td></tr>
-<tr><td><b>kKnobDrawable</b></td><td>Allows to override a color configuration and set a drawable as the knob graphics.</td></tr>
+<tr><td><b>kKnobDrawable</b></td><td>Allows to override a color configuration and set a drawable as the knob graphics. If this is present, both kKnob* and kKnobCenter attributes will be ignored.</td></tr>
 <tr><td><b>kKnobDrawableRotates</b></td><td>When this is true, the drawable will be rotated accordingly, otherwise it will stay still.</td></tr>
 <tr><td><br><br></td></tr>
 <tr><td><b>kStateMarkersWidth</b></td><td>Width of the line markers.</td></tr>
@@ -146,6 +145,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 ### TODO List
 * Allow to put multiple indicators
 * Popup balloons with values
+
+### Known bugs
+* For some possible Android Studio bug, attributes fail to appear in the pop-up hint window when pressing Ctrl-Space. Any help to fix this is really appreciated.
 
 Author
 -------
