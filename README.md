@@ -126,6 +126,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kMaxAngle</b></td></tr>
 </table>
 
+### New in 1.2.3
+* Debug
+
 ### New in 1.2.2
 * Added samples
 
