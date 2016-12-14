@@ -32,7 +32,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.2.2'
+        compile 'com.github.BeppiMenozzi:Knob:1.2.3'
         ...
     }
 
