@@ -87,13 +87,13 @@
                 app:kBorderColor="@color/grey_800"
                 app:kAnimationSpeed="1"
                 app:kAnimationBounciness="3"
-                app:kSwipeSensitivityPixels="30"
+                app:kSwipeSensitivityPixels="10"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="Potentiometer"
+                android:text="Integer value input"
                 android:gravity="center"
                 />
 

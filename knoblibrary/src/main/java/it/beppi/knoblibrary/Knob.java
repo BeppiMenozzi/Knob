@@ -292,54 +292,54 @@ public class Knob extends View {
     void loadAttributes(AttributeSet attrs) {
         if (attrs == null) return;
 
-        TypedArray typedArray = ctx.obtainStyledAttributes(attrs, R.styleable.KnobSelector);
+        TypedArray typedArray = ctx.obtainStyledAttributes(attrs, R.styleable.Knob);
 
-        numberOfStates = typedArray.getInt(R.styleable.KnobSelector_kNumberOfStates, numberOfStates);
-        defaultState = typedArray.getInt(R.styleable.KnobSelector_kDefaultState, defaultState);
+        numberOfStates = typedArray.getInt(R.styleable.Knob_kNumberOfStates, numberOfStates);
+        defaultState = typedArray.getInt(R.styleable.Knob_kDefaultState, defaultState);
 
-        borderWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kBorderWidth, borderWidth);
-        borderColor = typedArray.getColor(R.styleable.KnobSelector_kBorderColor, borderColor);
+        borderWidth = typedArray.getDimensionPixelSize(R.styleable.Knob_kBorderWidth, borderWidth);
+        borderColor = typedArray.getColor(R.styleable.Knob_kBorderColor, borderColor);
 
-        indicatorWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kIndicatorWidth, indicatorWidth);
-        indicatorColor = typedArray.getColor(R.styleable.KnobSelector_kIndicatorColor, indicatorColor);
-        indicatorRelativeLength = typedArray.getFloat(R.styleable.KnobSelector_kIndicatorRelativeLength, indicatorRelativeLength);
+        indicatorWidth = typedArray.getDimensionPixelSize(R.styleable.Knob_kIndicatorWidth, indicatorWidth);
+        indicatorColor = typedArray.getColor(R.styleable.Knob_kIndicatorColor, indicatorColor);
+        indicatorRelativeLength = typedArray.getFloat(R.styleable.Knob_kIndicatorRelativeLength, indicatorRelativeLength);
 
-        circularIndicatorRelativeRadius = typedArray.getFloat(R.styleable.KnobSelector_kCircularIndicatorRelativeRadius, circularIndicatorRelativeRadius);
-        circularIndicatorRelativePosition = typedArray.getFloat(R.styleable.KnobSelector_kCircularIndicatorRelativePosition, circularIndicatorRelativePosition);
-        circularIndicatorColor = typedArray.getColor(R.styleable.KnobSelector_kCircularIndicatorColor, circularIndicatorColor);
+        circularIndicatorRelativeRadius = typedArray.getFloat(R.styleable.Knob_kCircularIndicatorRelativeRadius, circularIndicatorRelativeRadius);
+        circularIndicatorRelativePosition = typedArray.getFloat(R.styleable.Knob_kCircularIndicatorRelativePosition, circularIndicatorRelativePosition);
+        circularIndicatorColor = typedArray.getColor(R.styleable.Knob_kCircularIndicatorColor, circularIndicatorColor);
 
-        knobColor = typedArray.getColor(R.styleable.KnobSelector_kKnobColor, knobColor);
-        knobRelativeRadius = typedArray.getFloat(R.styleable.KnobSelector_kKnobRelativeRadius, knobRelativeRadius);
+        knobColor = typedArray.getColor(R.styleable.Knob_kKnobColor, knobColor);
+        knobRelativeRadius = typedArray.getFloat(R.styleable.Knob_kKnobRelativeRadius, knobRelativeRadius);
 
-        knobCenterRelativeRadius = typedArray.getFloat(R.styleable.KnobSelector_kKnobCenterRelativeRadius, knobCenterRelativeRadius);
-        knobCenterColor = typedArray.getColor(R.styleable.KnobSelector_kKnobCenterColor, knobCenterColor);
+        knobCenterRelativeRadius = typedArray.getFloat(R.styleable.Knob_kKnobCenterRelativeRadius, knobCenterRelativeRadius);
+        knobCenterColor = typedArray.getColor(R.styleable.Knob_kKnobCenterColor, knobCenterColor);
         
-        knobDrawableRes = typedArray.getResourceId(R.styleable.KnobSelector_kKnobDrawable, knobDrawableRes);
-        knobDrawableRotates = typedArray.getBoolean(R.styleable.KnobSelector_kKnobDrawableRotates, knobDrawableRotates);
+        knobDrawableRes = typedArray.getResourceId(R.styleable.Knob_kKnobDrawable, knobDrawableRes);
+        knobDrawableRotates = typedArray.getBoolean(R.styleable.Knob_kKnobDrawableRotates, knobDrawableRotates);
 
-        stateMarkersWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kStateMarkersWidth, stateMarkersWidth);
-        stateMarkersColor = typedArray.getColor(R.styleable.KnobSelector_kStateMarkersColor, stateMarkersColor);
-        selectedStateMarkerColor = typedArray.getColor(R.styleable.KnobSelector_kSelectedStateMarkerColor, selectedStateMarkerColor);
-        stateMarkersRelativeLength = typedArray.getFloat(R.styleable.KnobSelector_kStateMarkersRelativeLength, stateMarkersRelativeLength);
-        selectedStateMarkerContinuous = typedArray.getBoolean(R.styleable.KnobSelector_kSelectedStateMarkerContinuous, selectedStateMarkerContinuous);
+        stateMarkersWidth = typedArray.getDimensionPixelSize(R.styleable.Knob_kStateMarkersWidth, stateMarkersWidth);
+        stateMarkersColor = typedArray.getColor(R.styleable.Knob_kStateMarkersColor, stateMarkersColor);
+        selectedStateMarkerColor = typedArray.getColor(R.styleable.Knob_kSelectedStateMarkerColor, selectedStateMarkerColor);
+        stateMarkersRelativeLength = typedArray.getFloat(R.styleable.Knob_kStateMarkersRelativeLength, stateMarkersRelativeLength);
+        selectedStateMarkerContinuous = typedArray.getBoolean(R.styleable.Knob_kSelectedStateMarkerContinuous, selectedStateMarkerContinuous);
 
-        animation = typedArray.getBoolean(R.styleable.KnobSelector_kAnimation, animation);
-        animationSpeed = typedArray.getFloat(R.styleable.KnobSelector_kAnimationSpeed, animationSpeed);
-        animationBounciness = typedArray.getFloat(R.styleable.KnobSelector_kAnimationBounciness, animationBounciness);
+        animation = typedArray.getBoolean(R.styleable.Knob_kAnimation, animation);
+        animationSpeed = typedArray.getFloat(R.styleable.Knob_kAnimationSpeed, animationSpeed);
+        animationBounciness = typedArray.getFloat(R.styleable.Knob_kAnimationBounciness, animationBounciness);
 
-        swipeDirection = swipeAttrToInt(typedArray.getString(R.styleable.KnobSelector_kSwipe));
-        swipeSensibilityPixels = typedArray.getInt(R.styleable.KnobSelector_kSwipeSensitivityPixels, swipeSensibilityPixels);
+        swipeDirection = swipeAttrToInt(typedArray.getString(R.styleable.Knob_kSwipe));
+        swipeSensibilityPixels = typedArray.getInt(R.styleable.Knob_kSwipeSensitivityPixels, swipeSensibilityPixels);
 
-        freeRotation = typedArray.getBoolean(R.styleable.KnobSelector_kFreeRotation, freeRotation);
-        minAngle = typedArray.getFloat(R.styleable.KnobSelector_kMinAngle, minAngle);
-        maxAngle = typedArray.getFloat(R.styleable.KnobSelector_kMaxAngle, maxAngle);
+        freeRotation = typedArray.getBoolean(R.styleable.Knob_kFreeRotation, freeRotation);
+        minAngle = typedArray.getFloat(R.styleable.Knob_kMinAngle, minAngle);
+        maxAngle = typedArray.getFloat(R.styleable.Knob_kMaxAngle, maxAngle);
 
-        stateMarkersAccentWidth = typedArray.getDimensionPixelSize(R.styleable.KnobSelector_kStateMarkersAccentWidth, stateMarkersAccentWidth);
-        stateMarkersAccentColor = typedArray.getColor(R.styleable.KnobSelector_kStateMarkersAccentColor, stateMarkersAccentColor);
-        stateMarkersAccentRelativeLength = typedArray.getFloat(R.styleable.KnobSelector_kStateMarkersAccentRelativeLength, stateMarkersAccentRelativeLength);
-        stateMarkersAccentPeriodicity = typedArray.getInt(R.styleable.KnobSelector_kStateMarkersAccentPeriodicity, stateMarkersAccentPeriodicity);
+        stateMarkersAccentWidth = typedArray.getDimensionPixelSize(R.styleable.Knob_kStateMarkersAccentWidth, stateMarkersAccentWidth);
+        stateMarkersAccentColor = typedArray.getColor(R.styleable.Knob_kStateMarkersAccentColor, stateMarkersAccentColor);
+        stateMarkersAccentRelativeLength = typedArray.getFloat(R.styleable.Knob_kStateMarkersAccentRelativeLength, stateMarkersAccentRelativeLength);
+        stateMarkersAccentPeriodicity = typedArray.getInt(R.styleable.Knob_kStateMarkersAccentPeriodicity, stateMarkersAccentPeriodicity);
 
-        enabled = typedArray.getBoolean(R.styleable.KnobSelector_kEnabled, enabled);
+        enabled = typedArray.getBoolean(R.styleable.Knob_kEnabled, enabled);
 
         typedArray.recycle();
     }

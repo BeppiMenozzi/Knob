@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="KnobSelector">
+    <declare-styleable name="Knob">
         <attr name="kNumberOfStates" format="integer"/>
         <attr name="kDefaultState" format="integer"/>
 
