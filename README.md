@@ -1,7 +1,7 @@
 # Rotary Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
-<img src="ezgif.com-5943f47a71.gif"><br>
+<img src="ezgif.com-679687e0bb.gif"><br>
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
 But the rotating knob has a lot of advantages over other radio-buttons, seek bars or other selectors:
 
@@ -16,8 +16,6 @@ Possible usages are:
 * Replacement for a ViewPager indicator, for fast scrolling pages without using an entire line of the screen
 
 <i>This version is still in beta and still misses a number of features that are going to be added in the next future.</i><br><br>
-
-<img src="ezgif.com-b175d4980a.gif"><br><br>
 
 ### Setup
 In your project's build.gradle file:
@@ -34,7 +32,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.2.1'
+        compile 'com.github.BeppiMenozzi:Knob:1.2.2'
         ...
     }
 
@@ -65,7 +63,13 @@ Listener:
 
     ...
 
+<br>
+<img src="ezgif.com-b175d4980a.gif"><br>
+
+This is what you will have with this default configuration. Please grab graphics and configurations from the sample as you like to match your own needs.
+<br><br>Some other fancy configurations that you can find in the sample:<br>
 <img src="ezgif.com-ec0277b0a0.gif"><br>
+
 
 ### Graphical structure
 The Knob is completely customizable. The many customizable attributes can all be set both via xml file, and programmatically.<br><br>
@@ -121,6 +125,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
 </table>
+
+### New in 1.2.2
+* Added samples
 
 ### New in 1.2.1
 * Added continuous mode
