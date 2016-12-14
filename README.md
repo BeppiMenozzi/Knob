@@ -155,8 +155,6 @@ Here is the list of the xml attributes that can be used to customize the View. A
 * Allow to put multiple indicators
 * Popup balloons with values
 
-### Known bugs
-* For some possible Android Studio bug, attributes fail to appear in the pop-up hint window when pressing Ctrl-Space. Any help to fix this is really appreciated.
 
 Author
 -------
