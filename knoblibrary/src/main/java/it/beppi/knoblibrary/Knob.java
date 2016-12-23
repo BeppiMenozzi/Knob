@@ -393,7 +393,7 @@ public class Knob extends View {
 
         showBalloonValues = typedArray.getBoolean(R.styleable.Knob_kShowBalloonValues, showBalloonValues);
         balloonValuesTimeToLive = typedArray.getInt(R.styleable.Knob_kBalloonValuesTimeToLive, balloonValuesTimeToLive);
-        balloonValuesRelativePosition = typedArray.getFloat(R.styleable.Knob_kBalloonValuesRelativeposition, balloonValuesRelativePosition);
+        balloonValuesRelativePosition = typedArray.getFloat(R.styleable.Knob_kBalloonValuesRelativePosition, balloonValuesRelativePosition);
         balloonValuesTextSize = typedArray.getDimension(R.styleable.Knob_kBalloonValuesTextSize, balloonValuesTextSize);
         balloonValuesAnimation = balloonAnimationAttrToInt(typedArray.getString(R.styleable.Knob_kBalloonValuesAnimation));
         balloonValuesArray = typedArray.getTextArray(R.styleable.Knob_kBalloonValuesArray);

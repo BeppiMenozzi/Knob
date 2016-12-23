@@ -1,11 +1,11 @@
 # Rotary Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
-<img src="ezgif.com-b2a5c65061.gif" height="200">
-<img src="ezgif.com-83db7ae2c3.gif" height="200">
-<img src="ezgif.com-1f765ab9ba.gif" height="200">
-<img src="ezgif.com-b3ad2de51c.gif" height="200">
-<img src="ezgif.com-9a0a0e7d83.gif" height="200">
+<img src="gifs/ezgif.com-b2a5c65061.gif" height="200">
+<img src="gifs/ezgif.com-83db7ae2c3.gif" height="200">
+<img src="gifs/ezgif.com-1f765ab9ba.gif" height="200">
+<img src="gifs/ezgif.com-b3ad2de51c.gif" height="200">
+<img src="gifs/ezgif.com-9a0a0e7d83.gif" height="200">
 <br>
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
 But the rotating knob has a lot of advantages over other radio-buttons, seek bars or other selectors:
@@ -70,10 +70,10 @@ Listener:
 
 <br>
 As default, nearly all features are disabled and the default knob is minimal:<br>
-<img src="ezgif.com-b175d4980a.gif"><br>
+<img src="gifs/ezgif.com-b175d4980a.gif"><br>
 This is what you will have with this default configuration. Feel free to grab graphics and configurations from the sample as you like to match your own needs.
 <br><br>Some other fancy configurations that you can find in the sample:<br>
-<img src="ezgif.com-ec0277b0a0.gif"><br>
+<img src="gifs/ezgif.com-ec0277b0a0.gif"><br>
 
 
 ### Graphical structure

@@ -51,7 +51,7 @@
 
         <attr name="kShowBalloonValues" format="boolean"/>
         <attr name="kBalloonValuesTimeToLive" format="integer"/>
-        <attr name="kBalloonValuesRelativeposition" format="float"/>
+        <attr name="kBalloonValuesRelativePosition" format="float"/>
         <attr name="kBalloonValuesTextSize" format="dimension"/>
         <attr name="kBalloonValuesAnimation">
             <enum name="pop" value="0"/>
