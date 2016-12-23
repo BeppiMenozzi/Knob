@@ -1,7 +1,7 @@
 # Rotary Knob Selector
 
 A customizable selector that replicates the behaviour of a knob with discrete values.<br><br>
-<img src="ezgif.com-f75440602d.gif"><br>
+<img src="ezgif.com-f75440602d.gif"><img src="ezgif.com-b175d4980a.gif"><br>
 The knob is a powerful tool. For some reason, anyway, it's rarely used, and I could not find it in the Android panorama.
 But the rotating knob has a lot of advantages over other radio-buttons, seek bars or other selectors:
 
