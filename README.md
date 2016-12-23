@@ -124,7 +124,18 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minumim the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
 <tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
+<tr><th colspan="2">Popup balloons</th></tr>
+<tr><td><b>kShowBalloonValues</b></td><td>Enable popup balloon values</td></tr>
+<tr><td><b>kBalloonValuesTimeToLive</b></td><td>How long do the popup balloons display. 0 = permanent</td></tr>
+<tr><td><b>kBalloonValuesRelativePosition</b></td><td>Relative position of the balloons. 0 = center, 1 = edge. Values >1 are allowed</td></tr>
+<tr><td><b>kBalloonValuesTextSize</b></td><td>Balloon's text size</td></tr>
+<tr><td><b>kBalloonValuesAnimation</b></td><td>Animation. Choose among *fade*, *pop* or *scale*</td></tr>
+<tr><td><b>kBalloonValuesArray</b></td><td>Array of strings for the balloon values. If this is not defined, numbers will be written</td></tr>
+<tr><td><b>kBalloonValuesSlightlyTransparent</b></td><td>When true, the balloons will be 75% visibile</td></tr>
 </table>
+
+### New in 1.3.0
+* Added popup balloons
 
 ### New in 1.2.3
 * Debug
