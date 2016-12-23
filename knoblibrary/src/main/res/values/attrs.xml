@@ -49,6 +49,18 @@
         <attr name="kStateMarkersAccentRelativeLength" format="float"/>
         <attr name="kStateMarkersAccentPeriodicity" format="integer"/>
 
+        <attr name="kShowBalloonValues" format="boolean"/>
+        <attr name="kBalloonValuesTimeToLive" format="integer"/>
+        <attr name="kBalloonValuesRelativeposition" format="float"/>
+        <attr name="kBalloonValuesTextSize" format="dimension"/>
+        <attr name="kBalloonValuesAnimation">
+            <enum name="pop" value="0"/>
+            <enum name="scale" value="1"/>
+            <enum name="fade" value="2"/>
+        </attr>
+        <attr name="kBalloonValuesArray" format="reference"/>
+        <attr name="kBalloonValuesSlightlyTransparent" format="boolean"/>
+
         <attr name="kEnabled" format="boolean"/>
     </declare-styleable>
 </resources>

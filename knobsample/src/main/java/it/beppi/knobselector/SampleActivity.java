@@ -71,6 +71,7 @@ public class SampleActivity extends AppCompatActivity {
                 textView4.setText(Integer.toString(state));
             }
         });
+
     }
 
     @Override

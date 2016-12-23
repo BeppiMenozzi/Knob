@@ -19,6 +19,8 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringSystem;
 
+import it.beppi.balloonpopuplibrary.BalloonPopup;
+
 /**
  * Created by Beppi on 06/12/2016.
  */
@@ -105,6 +107,7 @@ public class Knob extends View {
         paintCircularIndicator(canvas);
         paintKnobCenter(canvas);
         paintKnobBorder(canvas);
+        displayBalloons();
     }
 
     void paintKnob(Canvas canvas) {
@@ -211,6 +214,47 @@ public class Knob extends View {
         }
     }
 
+    int balloonsX() {
+        return (int)(centerX + (float)(externalRadius * balloonValuesRelativePosition * Math.sin(currentAngle)));
+    }
+    int balloonsY() {
+        return (int)(centerY + (float)(externalRadius * balloonValuesRelativePosition * Math.cos(currentAngle)));
+    }
+    String balloonText() {
+        if (balloonValuesArray == null)
+            return Integer.toString(actualState);
+        else
+            return balloonValuesArray[actualState].toString();
+    }
+
+    void displayBalloons() {
+        if (!showBalloonValues) return;
+        if (balloonPopup == null || !balloonPopup.isShowing())
+            balloonPopup = BalloonPopup.Builder(ctx, this)
+                    .text(balloonText())
+                    .gravity(BalloonPopup.BalloonGravity.halftop_halfleft)
+                    .offsetX(balloonsX())
+                    .offsetY(balloonsY())
+                    .textSize((int)balloonValuesTextSize)
+                    .shape(BalloonPopup.BalloonShape.rounded_square)
+                    .timeToLive(balloonValuesTimeToLive)
+                    .animation(getBalloonAnimation())
+                    .show();
+        else {
+            balloonPopup.updateOffset(balloonsX(), balloonsY(), true);
+            balloonPopup.updateText(balloonText(), true);
+            balloonPopup.updateTextSize((int)balloonValuesTextSize, true);  // solo l'ultimo richiede l'aggiornamento del timer?
+        }
+    }
+    BalloonPopup.BalloonAnimation getBalloonAnimation() {
+        if (balloonValuesAnimation == 0 && balloonValuesSlightlyTransparent) return BalloonPopup.BalloonAnimation.fade75_and_pop;
+        else if (balloonValuesAnimation == 0) return BalloonPopup.BalloonAnimation.fade_and_pop;
+        else if (balloonValuesAnimation == 1 && balloonValuesSlightlyTransparent) return BalloonPopup.BalloonAnimation.fade75_and_scale;
+        else if (balloonValuesAnimation == 1) return BalloonPopup.BalloonAnimation.fade_and_scale;
+        else if (balloonValuesAnimation == 2 && balloonValuesSlightlyTransparent) return BalloonPopup.BalloonAnimation.fade75;
+        else return BalloonPopup.BalloonAnimation.fade;
+    }
+
     // default values
     private int numberOfStates = 6;
     private int defaultState = 0;
@@ -250,6 +294,13 @@ public class Knob extends View {
     private int stateMarkersAccentPeriodicity = 0;  // 0 = off
     private int knobDrawableRes = 0;
     private boolean knobDrawableRotates = true;
+    private boolean showBalloonValues = false;
+    private int balloonValuesTimeToLive = 400;
+    private float balloonValuesRelativePosition = 1.3f;
+    private float balloonValuesTextSize = 9;
+    private int balloonValuesAnimation = 0;
+    private CharSequence[] balloonValuesArray = null;
+    private boolean balloonValuesSlightlyTransparent = true;
 
 
     // initialize
@@ -259,6 +310,7 @@ public class Knob extends View {
         loadAttributes(attrs);
         initTools();
         initDrawables();
+        initBalloons();
         initListeners();
         initStatus();
     }
@@ -271,7 +323,7 @@ public class Knob extends View {
     private double currentAngle;
     private int previousState = defaultState;
     private Drawable knobDrawable;
-    private Canvas tempCanvas;
+    private BalloonPopup balloonPopup;
 
     void initTools() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -339,6 +391,14 @@ public class Knob extends View {
         stateMarkersAccentRelativeLength = typedArray.getFloat(R.styleable.Knob_kStateMarkersAccentRelativeLength, stateMarkersAccentRelativeLength);
         stateMarkersAccentPeriodicity = typedArray.getInt(R.styleable.Knob_kStateMarkersAccentPeriodicity, stateMarkersAccentPeriodicity);
 
+        showBalloonValues = typedArray.getBoolean(R.styleable.Knob_kShowBalloonValues, showBalloonValues);
+        balloonValuesTimeToLive = typedArray.getInt(R.styleable.Knob_kBalloonValuesTimeToLive, balloonValuesTimeToLive);
+        balloonValuesRelativePosition = typedArray.getFloat(R.styleable.Knob_kBalloonValuesRelativeposition, balloonValuesRelativePosition);
+        balloonValuesTextSize = typedArray.getDimension(R.styleable.Knob_kBalloonValuesTextSize, balloonValuesTextSize);
+        balloonValuesAnimation = balloonAnimationAttrToInt(typedArray.getString(R.styleable.Knob_kBalloonValuesAnimation));
+        balloonValuesArray = typedArray.getTextArray(R.styleable.Knob_kBalloonValuesArray);
+        balloonValuesSlightlyTransparent = typedArray.getBoolean(R.styleable.Knob_kBalloonValuesSlightlyTransparent, balloonValuesSlightlyTransparent);
+
         enabled = typedArray.getBoolean(R.styleable.Knob_kEnabled, enabled);
 
         typedArray.recycle();
@@ -349,6 +409,13 @@ public class Knob extends View {
         else if (s.equals("1")) return 1;  // vertical
         else if (s.equals("2")) return 2; // default  - horizontal
         else return 2;
+    }
+    int balloonAnimationAttrToInt(String s) {
+        if (s == null) return 0;
+        if (s.equals("0")) return 0;       // pop
+        else if (s.equals("1")) return 1;  // scale
+        else if (s.equals("2")) return 2;  // fade
+        else return 0;
     }
 
     void initListeners() {
@@ -437,6 +504,10 @@ public class Knob extends View {
         calcActualState();
         currentAngle = calcAngle(currentState);
         spring.setCurrentValue(currentAngle);
+    }
+
+    void initBalloons() {
+
     }
 
     // behaviour
@@ -846,5 +917,45 @@ public class Knob extends View {
     public void setKnobDrawable(Drawable knobDrawable) {
         this.knobDrawable = knobDrawable;
         takeEffect(animation);
+    }
+
+    public boolean isShowBalloonValues() {
+        return showBalloonValues;
+    }
+
+    public void setShowBalloonValues(boolean showBalloonValues) {
+        this.showBalloonValues = showBalloonValues;
+    }
+
+    public int getBalloonValuesTimeToLive() {
+        return balloonValuesTimeToLive;
+    }
+
+    public void setBalloonValuesTimeToLive(int balloonValuesTimeToLive) {
+        this.balloonValuesTimeToLive = balloonValuesTimeToLive;
+    }
+
+    public float getBalloonValuesRelativePosition() {
+        return balloonValuesRelativePosition;
+    }
+
+    public void setBalloonValuesRelativePosition(float balloonValuesRelativePosition) {
+        this.balloonValuesRelativePosition = balloonValuesRelativePosition;
+    }
+
+    public float getBalloonValuesTextSize() {
+        return balloonValuesTextSize;
+    }
+
+    public void setBalloonValuesTextSize(float balloonValuesTextSize) {
+        this.balloonValuesTextSize = balloonValuesTextSize;
+    }
+
+    public boolean isBalloonValuesSlightlyTransparent() {
+        return balloonValuesSlightlyTransparent;
+    }
+
+    public void setBalloonValuesSlightlyTransparent(boolean balloonValuesSlightlyTransparent) {
+        this.balloonValuesSlightlyTransparent = balloonValuesSlightlyTransparent;
     }
 }
