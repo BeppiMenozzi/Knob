@@ -68,9 +68,9 @@ Listener:
     ...
 
 <br>
+As default, nearly all features are disabled and the default knob is minimal:<br>
 <img src="ezgif.com-b175d4980a.gif"><br>
-
-This is what you will have with this default configuration. Please grab graphics and configurations from the sample as you like to match your own needs.
+This is what you will have with this default configuration. Feel free to grab graphics and configurations from the sample as you like to match your own needs.
 <br><br>Some other fancy configurations that you can find in the sample:<br>
 <img src="ezgif.com-ec0277b0a0.gif"><br>
 
