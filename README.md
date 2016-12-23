@@ -134,6 +134,10 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kBalloonValuesSlightlyTransparent</b></td><td>When true, the balloons will be 75% visibile</td></tr>
 </table>
 
+### Dependencies
+You don't have to add any dependency.
+Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
+
 ### New in 1.3.0
 * Added popup balloons
 
@@ -164,7 +168,6 @@ Here is the list of the xml attributes that can be used to customize the View. A
 
 ### TODO List
 * Allow to put multiple indicators
-* Popup balloons with values
 
 
 Author
