@@ -100,7 +100,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kKnobColor</b></td><td>Color of the knob.</td></tr>
 <tr><td><b>kKnobRelativeRadius</b></td><td>Radius of the knob, relative to the largest possible circle inside the view. 1 = fill all the view, 0.5 = fill half of the view.</td></tr>
 <tr><td><b>kKnobCenterColor</b></td><td>Color of the center of the knob.</td></tr>
-<tr><td><b>kKnobCenterRedlativeRadius</b></td><td>Radius of the center, relative to the radius of the knob. 0 = disable.</td></tr>
+<tr><td><b>kKnobCenterRelativeRadius</b></td><td>Radius of the center, relative to the radius of the knob. 0 = disable.</td></tr>
 <tr><td><b>kBorderWidth</b></td><td>Width of the external circle. 0 = disable.</td></tr>
 <tr><td><b>kBorderColor</b></td><td>Color of the external circle.</td></tr>
 <tr><td><b>kKnobDrawable</b></td><td>Allows to override a color configuration and set a drawable as the knob graphics. If this is present, both kKnob* and kKnobCenter* attributes will be ignored.</td></tr>
