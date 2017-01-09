@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
 
 import com.facebook.rebound.SimpleSpringListener;
 import com.facebook.rebound.Spring;
@@ -418,6 +419,13 @@ public class Knob extends View {
         else return 0;
     }
 
+    private void disallowParentToHandleTouchEvents() {
+        ViewParent parent = getParent();
+        if (parent != null) {
+            parent.requestDisallowInterceptTouchEvent(true);
+        }
+    }
+
     void initListeners() {
 
         this.setOnClickListener(new OnClickListener() {
@@ -439,6 +447,7 @@ public class Knob extends View {
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeY = y;
                         swipeing = false;
+                        disallowParentToHandleTouchEvents(); // needed when Knob's parent is a ScrollView
                     }
                     else if (action == MotionEvent.ACTION_MOVE) {
                         if (y - swipeY > swipeSensibilityPixels) {
@@ -465,6 +474,7 @@ public class Knob extends View {
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeX = x;
                         swipeing = false;
+                        disallowParentToHandleTouchEvents(); // needed when Knob's parent is a ScrollView
                     }
                     else if (action == MotionEvent.ACTION_MOVE) {
                         if (x - swipeX > swipeSensibilityPixels) {
