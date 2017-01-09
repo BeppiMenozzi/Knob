@@ -143,6 +143,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 You don't have to add any dependency.
 Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
 
+### New in 1.4.0
+* Fixed swipe behaviour while in ScrollView.
+
 ### New in 1.3.0
 * Added popup balloons
 
@@ -174,6 +177,8 @@ Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/
 ### TODO List
 * Allow to put multiple indicators
 
+### Known bugs
+* BalloonPopup doesn't scroll when inside a ScrollView
 
 Author
 -------
