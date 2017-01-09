@@ -13,6 +13,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="it.beppi.knobselector.SampleActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -403,5 +411,19 @@
             app:kStateMarkersRelativeLength="0.7"
             app:kStateMarkersWidth="3dp" />
     </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minLines="10"
+                android:text="abcdewfghi\n\ntesttest\n\n\n\ntesttest" />
+
+            <it.beppi.knoblibrary.Knob
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:kSwipe="vertical"
+                />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
