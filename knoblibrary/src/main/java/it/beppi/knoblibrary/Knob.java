@@ -155,7 +155,14 @@ public class Knob extends View {
         double min = Math.toRadians((double)minAngle);
         double max = Math.toRadians((double)maxAngle - 0.0001);
         double range = max - min;
-        return normalizeAngle(Math.PI - min - position * (range / numberOfStates));
+
+        if (numberOfStates <= 1)
+            return 0;
+
+        double singleStepAngle = range / (numberOfStates-1);
+        if (Math.PI*2 - range < singleStepAngle)
+            singleStepAngle = range / numberOfStates;
+        return normalizeAngle(Math.PI - min - position * singleStepAngle);
 
         // return Math.PI - position * (2 * Math.PI / numberOfStates);
     }
@@ -240,6 +247,7 @@ public class Knob extends View {
                     .shape(BalloonPopup.BalloonShape.rounded_square)
                     .timeToLive(balloonValuesTimeToLive)
                     .animation(getBalloonAnimation())
+                    .stayWithinScreenBounds(true)
                     .show();
         else {
             balloonPopup.updateOffset(balloonsX(), balloonsY(), true);
@@ -408,7 +416,8 @@ public class Knob extends View {
         if (s == null) return 2;
         if (s.equals("0")) return 0;
         else if (s.equals("1")) return 1;  // vertical
-        else if (s.equals("2")) return 2; // default  - horizontal
+        else if (s.equals("2")) return 2;  // default  - horizontal
+        else if (s.equals("3")) return 3;  // both
         else return 2;
     }
     int balloonAnimationAttrToInt(String s) {
@@ -485,6 +494,37 @@ public class Knob extends View {
                         }
                         else if (swipeX - x > swipeSensibilityPixels) {
                             swipeX = x;
+                            swipeing = true;
+                            decreaseValue();
+                            return true;
+                        }
+                    }
+                    else if (action == MotionEvent.ACTION_UP) {
+                        if (!swipeing) toggle(animation);    // click
+                        return true;
+                    }
+                    return false;
+                }
+                else if (swipeDirection == 3) {  // both
+                    int x = (int) motionEvent.getX();
+                    int y = (int) motionEvent.getY();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        swipeX = x;
+                        swipeY = y;
+                        swipeing = false;
+                        disallowParentToHandleTouchEvents(); // needed when Knob's parent is a ScrollView
+                    }
+                    else if (action == MotionEvent.ACTION_MOVE) {
+                        if (x - swipeX > swipeSensibilityPixels || swipeY - y > swipeSensibilityPixels ) {
+                            swipeX = x;
+                            swipeY = y;
+                            swipeing = true;
+                            increaseValue();
+                            return true;
+                        }
+                        else if (swipeX - x > swipeSensibilityPixels || y - swipeY > swipeSensibilityPixels) {
+                            swipeX = x;
+                            swipeY = y;
                             swipeing = true;
                             decreaseValue();
                             return true;

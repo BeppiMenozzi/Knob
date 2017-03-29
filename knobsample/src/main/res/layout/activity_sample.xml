@@ -104,13 +104,14 @@
                         app:kIndicatorWidth="1dp"
                         app:kKnobDrawable="@drawable/knob"
                         app:kKnobDrawableRotates="false"
-                        app:kMaxAngle="130.0"
+                        app:kMaxAngle="120.0"
                         app:kMinAngle="-120.0"
-                        app:kNumberOfStates="30"
+                        app:kNumberOfStates="6"
                         app:kShowBalloonValues="true"
                         app:kStateMarkersAccentPeriodicity="5"
                         app:kStateMarkersAccentWidth="0.5dp"
                         app:kStateMarkersWidth="0.5dp"
+                        app:kSwipe="vertical_horizontal"
                         app:kSwipeSensitivityPixels="7" />
 
                     <TextView
@@ -118,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:lines="2"
-                        android:text="Integer value input" />
+                        android:text="Integer value input - swipe in both directions" />
 
                 </LinearLayout>
 
