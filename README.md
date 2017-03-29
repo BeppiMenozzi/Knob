@@ -143,6 +143,12 @@ Here is the list of the xml attributes that can be used to customize the View. A
 You don't have to add any dependency.
 Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
 
+### New in 1.5.0
+* Fixed: when min and max angles were present, the last marker was not in the correct place
+* Added swipe in both directions
+* Fixed: balloon now does not exit the window
+* minSdkVersion from 9 to 11
+
 ### New in 1.4.0
 * Fixed swipe behaviour while in ScrollView.
 
