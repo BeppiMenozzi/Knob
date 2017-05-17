@@ -127,7 +127,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kSwipeSensitivityPixels</b></td><td>How many pixels are needed for the swipe to make the knob increase value. Higher = slower (default: 100). If the circular swipe gesture is chosen, this parameter is ignored.</td></tr>
 <tr><th colspan="2">Rotation and constraints</th></tr>
 <tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minimum the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
-<tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only one arc, and don't cover the entire circumference, like, for example, a speedometer. This parameter generally goes together with kFreeRotation=off</td></tr>
+<tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only one arc, and don't cover the entire circumference, like, for example, a speedometer. If this and the next parameters are set, generally they go together with kFreeRotation=off</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
 <tr><th colspan="2">Popup balloons</th></tr>
 <tr><td><b>kShowBalloonValues</b></td><td>Enable popup balloon values</td></tr>
