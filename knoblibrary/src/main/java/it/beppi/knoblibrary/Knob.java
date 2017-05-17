@@ -22,6 +22,8 @@ import com.facebook.rebound.SpringSystem;
 
 import it.beppi.balloonpopuplibrary.BalloonPopup;
 
+import static java.lang.Math.PI;
+
 /**
  * Created by Beppi on 06/12/2016.
  */
@@ -116,7 +118,7 @@ public class Knob extends View {
             knobDrawable.setBounds((int)(centerX-knobRadius), (int)(centerY-knobRadius), (int)(centerX+knobRadius), (int)(centerY+knobRadius));
             if (knobDrawableRotates) {
                 canvas.save();
-                canvas.rotate((float)-Math.toDegrees(Math.PI + currentAngle), centerX, centerY);
+                canvas.rotate((float)-Math.toDegrees(PI + currentAngle), centerX, centerY);
                 knobDrawable.draw(canvas);
                 canvas.restore();
             }
@@ -146,8 +148,8 @@ public class Knob extends View {
     }
 
     double normalizeAngle(double angle) {
-        while (angle < 0) angle += Math.PI*2;
-        while (angle >= Math.PI*2) angle -= Math.PI*2;
+        while (angle < 0) angle += PI*2;
+        while (angle >= PI*2) angle -= PI*2;
         return angle;
     }
 
@@ -160,9 +162,9 @@ public class Knob extends View {
             return 0;
 
         double singleStepAngle = range / (numberOfStates-1);
-        if (Math.PI*2 - range < singleStepAngle)
+        if (PI*2 - range < singleStepAngle)
             singleStepAngle = range / numberOfStates;
-        return normalizeAngle(Math.PI - min - position * singleStepAngle);
+        return normalizeAngle(PI - min - position * singleStepAngle);
 
         // return Math.PI - position * (2 * Math.PI / numberOfStates);
     }
@@ -171,8 +173,8 @@ public class Knob extends View {
         double angleCurr = normalizeAngle(spring.getCurrentValue());
         double angleNew = calcAngle(actualState);
         if (freeRotation) {
-            if (angleCurr > angleNew && angleCurr - angleNew > Math.PI) angleNew += Math.PI * 2;
-            else if (angleCurr < angleNew && angleNew - angleCurr > Math.PI) angleNew -= Math.PI * 2;
+            if (angleCurr > angleNew && angleCurr - angleNew > PI) angleNew += PI * 2;
+            else if (angleCurr < angleNew && angleNew - angleCurr > PI) angleNew -= PI * 2;
         }
         spring.setCurrentValue(angleCurr);
         spring.setEndValue(angleNew);
@@ -290,7 +292,7 @@ public class Knob extends View {
     private int selectedStateMarkerColor = Color.YELLOW;
     private boolean selectedStateMarkerContinuous = false;
     private float stateMarkersRelativeLength = 0.06f;
-    private int swipeDirection = 2;
+    private int swipeDirection = 4;   // circular  (before it was horizontal)
     private int swipeSensibilityPixels = 100;
     private int swipeX=0, swipeY=0;  // used for swipe management
     boolean swipeing = false;        // used for swipe / click management
@@ -418,6 +420,7 @@ public class Knob extends View {
         else if (s.equals("1")) return 1;  // vertical
         else if (s.equals("2")) return 2;  // default  - horizontal
         else if (s.equals("3")) return 3;  // both
+        else if (s.equals("4")) return 4;  // circular
         else return 2;
     }
     int balloonAnimationAttrToInt(String s) {
@@ -536,6 +539,26 @@ public class Knob extends View {
                     }
                     return false;
                 }
+                else if (swipeDirection == 4) { // circular
+                    int x = (int) motionEvent.getX();
+                    int y = (int) motionEvent.getY();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        swipeing = false;
+                        disallowParentToHandleTouchEvents(); // needed when Knob's parent is a ScrollView
+                    }
+                    else if (action == MotionEvent.ACTION_MOVE) {
+                        double angle = Math.atan2((double)(y-centerY), (double)(x-centerX));
+                        swipeing = true;
+                        setValueByAngle(angle, animation);
+                        return true;
+                    }
+                    else if (action == MotionEvent.ACTION_UP) {
+                        if (!swipeing) toggle(animation);    // click
+                        return true;
+                    }
+                    return false;
+
+                }
 
                 return false;
             }
@@ -593,6 +616,39 @@ public class Knob extends View {
         takeEffect(animate);
     }
     public void decreaseValue() { decreaseValue(animation);}
+
+    public void setValueByAngle(double angle, boolean animate) {  // sets the value of the knob given an angle instead of a state
+        if (numberOfStates <= 1)
+            return;
+        previousState = currentState;
+        double min = Math.toRadians((double)minAngle);
+        double max = Math.toRadians((double)maxAngle - 0.0001);
+        double range = max - min;
+
+        double singleStepAngle = range / (numberOfStates);
+        if (PI*2 - range < singleStepAngle)
+            singleStepAngle = range / numberOfStates;
+
+        min = (float)normalizeAngle(min);
+        while (min > max) max += 2*PI;      // both min and max are positive and in the correct order.
+
+        angle = normalizeAngle(angle + PI/2);
+        while (angle < min) angle += 2*PI;             // set angle after minangle
+        if (angle > max) { // if angle is out of range because the range is limited set to the closer limit
+            if (angle - max > min - angle + PI*2)
+                angle = min;
+            else
+                angle = max;
+        }
+
+        currentState = (int)((angle - min) / singleStepAngle);   // calculate value
+        if (!freeRotation && Math.abs(currentState - previousState) == numberOfStates-1)    // manage free rotation
+            currentState = previousState;
+
+        calcActualState();
+        if(listener != null) listener.onState(actualState);
+        takeEffect(animate);
+    }
 
     private void takeEffect(boolean animate) {
         if (animate) {

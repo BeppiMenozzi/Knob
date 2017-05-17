@@ -123,7 +123,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kCircularIndicatorRelativePosition</b></td><td>Distance of the circle indicator from the center, relative to the largest possible circle inside the view. 1 = put on edge, 0.5 = put half way.</td></tr>
 <tr><td><b>kCircularIndicatorColor</b></td><td>Color of the circular indicator.</td></tr>
 <tr><th colspan="2">Swipe behaviour</th></tr>
-<tr><td><b>kSwipe</b></td><td>Enable swipe. Values: off, vertical horizontal (default: horizontal).</td></tr>
+<tr><td><b>kSwipe</b></td><td>Enable swipe. Values: off, vertical, horizontal, both or circular (default: circular).</td></tr>
 <tr><td><b>kSwipeSensitivityPixels</b></td><td>How many pixels are needed for the swipe makes the knob increase value. Higher = slower (default: 100).</td></tr>
 <tr><th colspan="2">Rotation and constraints</th></tr>
 <tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minumim the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
@@ -142,6 +142,10 @@ Here is the list of the xml attributes that can be used to customize the View. A
 ### Dependencies
 You don't have to add any dependency.
 Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
+
+### New in 1.6.0
+* Added swipe in circular fashion
+* Changed the default swipe behaviour to circular
 
 ### New in 1.5.0
 * Fixed: when min and max angles were present, the last marker was not in the correct place
