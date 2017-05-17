@@ -110,7 +110,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kStateMarkersRelativeLength</b></td><td>Length of the line markers, relative to the largest possible circle inside the view. 1 = draw from edge to center, 0.5 = draw half length, starting from the edge.</td></tr>
 <tr><td><b>kStateMarkersColor</b></td><td>Color of the line markers.</td></tr>
 <tr><td><b>kSelectedStateMarkerColor</b></td><td>Color of the selected line marker.</td></tr>
-<tr><td><b>kSelectedStateMarkerContinuous</b></td><td>If the continuous mode is chosen, the selected markers will be all from minimum to current value, instead of only one.</td></tr>
+<tr><td><b>kSelectedStateMarkerContinuous</b></td><td>If the continuous mode is chosen, the knob will act like a gauge, selecting all the markes from the minimum to the current value. When this is false, only one marker is selected at any time.</td></tr>
 <tr><td><b>kStateMarkersAccentWidth</b></td><td>These attributes allow to create different "more important" markers, like on a normal clock are the minutes divisible by 5</td></tr>
 <tr><td><b>kStateMarkersAccentColor</b></td></tr>
 <tr><td><b>kStateMarkersAccentRelativeLength</b></td></tr>
@@ -124,10 +124,10 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><td><b>kCircularIndicatorColor</b></td><td>Color of the circular indicator.</td></tr>
 <tr><th colspan="2">Swipe behaviour</th></tr>
 <tr><td><b>kSwipe</b></td><td>Enable swipe. Values: off, vertical, horizontal, both or circular (default: circular).</td></tr>
-<tr><td><b>kSwipeSensitivityPixels</b></td><td>How many pixels are needed for the swipe makes the knob increase value. Higher = slower (default: 100).</td></tr>
+<tr><td><b>kSwipeSensitivityPixels</b></td><td>How many pixels are needed for the swipe to make the knob increase value. Higher = slower (default: 100). If the circular swipe gesture is chosen, this parameter is ignored.</td></tr>
 <tr><th colspan="2">Rotation and constraints</th></tr>
-<tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minumim the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
-<tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only on an arc, not on the entire circumference, like, for example, a speedometer.</td></tr>
+<tr><td><b>kFreeRotation</b></td><td>Enable free rotation. When false, after reaching maximum or minimum the indicator will stop, when true the value will continue in a round-robin fashion. Default: true</td></tr>
+<tr><td><b>kMinAngle</b></td><td>Put constraints on the indicator. This allows to create indicators that span only one arc, and don't cover the entire circumference, like, for example, a speedometer. This parameter generally goes together with kFreeRotation=off</td></tr>
 <tr><td><b>kMaxAngle</b></td></tr>
 <tr><th colspan="2">Popup balloons</th></tr>
 <tr><td><b>kShowBalloonValues</b></td><td>Enable popup balloon values</td></tr>
