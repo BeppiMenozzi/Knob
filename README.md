@@ -182,6 +182,7 @@ Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/
 
 ### TODO List
 * Allow to put multiple indicators
+* Circular gestures
 
 ### Known bugs
 * BalloonPopup doesn't scroll when inside a ScrollView
