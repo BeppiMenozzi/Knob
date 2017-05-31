@@ -30,6 +30,12 @@ import static java.lang.Math.PI;
 
 public class Knob extends View {
 
+    public static final int SWIPEDIRECTION_NONE = 0;
+    public static final int SWIPEDIRECTION_VERTICAL = 1;
+    public static final int SWIPEDIRECTION_HORIZONTAL = 2;
+    public static final int SWIPEDIRECTION_HORIZONTALVERTICAL = 3;
+    public static final int SWIPEDIRECTION_CIRCULAR = 4;
+
     // constructors
     public Knob(Context context) {
         super(context);

@@ -37,7 +37,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.6.0'
+        compile 'com.github.BeppiMenozzi:Knob:1.7.0'
         ...
     }
 
@@ -142,6 +142,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 ### Dependencies
 You don't have to add any dependency.
 Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
+
+### New in 1.7.0
+* Added public constants for swipe direction
 
 ### New in 1.6.0
 * Added swipe in circular fashion
