@@ -421,13 +421,13 @@ public class Knob extends View {
         typedArray.recycle();
     }
     int swipeAttrToInt(String s) {
-        if (s == null) return 2;
+        if (s == null) return 4;
         if (s.equals("0")) return 0;
         else if (s.equals("1")) return 1;  // vertical
-        else if (s.equals("2")) return 2;  // default  - horizontal
+        else if (s.equals("2")) return 2;  // horizontal
         else if (s.equals("3")) return 3;  // both
-        else if (s.equals("4")) return 4;  // circular
-        else return 2;
+        else if (s.equals("4")) return 4;  // default  - circular
+        else return 4;
     }
     int balloonAnimationAttrToInt(String s) {
         if (s == null) return 0;
