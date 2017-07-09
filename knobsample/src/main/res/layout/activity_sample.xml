@@ -35,7 +35,8 @@
                     <it.beppi.knoblibrary.Knob
                         android:id="@+id/knob1"
                         android:layout_width="96dp"
-                        android:layout_height="96dp" />
+                        android:layout_height="96dp"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -132,6 +133,7 @@
                     <it.beppi.knoblibrary.Knob
                         android:layout_width="96dp"
                         android:layout_height="96dp"
+                        app:kClickBehaviour="menu"
                         app:kAnimationBounciness="1"
                         app:kAnimationSpeed="0"
                         app:kBalloonValuesAnimation="scale"
@@ -220,6 +222,7 @@
                         android:id="@+id/multistate_toggle"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
+                        app:kClickBehaviour="menu"
                         app:kAnimationBounciness="5"
                         app:kAnimationSpeed="20"
                         app:kBalloonValuesArray="@array/multichoice"

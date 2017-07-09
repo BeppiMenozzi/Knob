@@ -9,8 +9,11 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.PopupMenu;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -35,6 +38,13 @@ public class Knob extends View {
     public static final int SWIPEDIRECTION_HORIZONTAL = 2;
     public static final int SWIPEDIRECTION_HORIZONTALVERTICAL = 3;
     public static final int SWIPEDIRECTION_CIRCULAR = 4;
+
+    public static final int ONCLICK_NONE = 0;
+    public static final int ONCLICK_NEXT = 1;
+    public static final int ONCLICK_PREV = 2;
+    public static final int ONCLICK_RESET = 3;
+    public static final int ONCLICK_MENU = 4;
+
 
     // constructors
     public Knob(Context context) {
@@ -318,6 +328,7 @@ public class Knob extends View {
     private int balloonValuesAnimation = 0;
     private CharSequence[] balloonValuesArray = null;
     private boolean balloonValuesSlightlyTransparent = true;
+    private int clickBehaviour = 1;   // next
 
 
     // initialize
@@ -416,6 +427,8 @@ public class Knob extends View {
         balloonValuesArray = typedArray.getTextArray(R.styleable.Knob_kBalloonValuesArray);
         balloonValuesSlightlyTransparent = typedArray.getBoolean(R.styleable.Knob_kBalloonValuesSlightlyTransparent, balloonValuesSlightlyTransparent);
 
+        clickBehaviour = clickAttrToInt(typedArray.getString(R.styleable.Knob_kClickBehaviour));
+
         enabled = typedArray.getBoolean(R.styleable.Knob_kEnabled, enabled);
 
         typedArray.recycle();
@@ -428,6 +441,15 @@ public class Knob extends View {
         else if (s.equals("3")) return 3;  // both
         else if (s.equals("4")) return 4;  // default  - circular
         else return 4;
+    }
+    int clickAttrToInt(String s) {
+        if (s == null) return 1;
+        if (s.equals("0")) return 0;
+        else if (s.equals("1")) return 1;  // default - next
+        else if (s.equals("2")) return 2;  // prev
+        else if (s.equals("3")) return 3;  // reset
+        else if (s.equals("4")) return 4;  // menu
+        else return 1;
     }
     int balloonAnimationAttrToInt(String s) {
         if (s == null) return 0;
@@ -444,13 +466,22 @@ public class Knob extends View {
         }
     }
 
-    void initListeners() {
+    void clickMe(View view) {
+        switch (clickBehaviour) {
+            case 0: break;
+            case 1: toggle(animation); break;
+            case 2: inverseToggle(animation); break;
+            case 3: revertToDefault(animation); break;
+            case 4: createPopupMenu(view); break;
+        }
+    }
 
+    void initListeners() {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!enabled) return;
-                toggle(animation);
+                clickMe(view);
             }
         });
 
@@ -482,7 +513,7 @@ public class Knob extends View {
                         }
                     }
                     else if (action == MotionEvent.ACTION_UP) {
-                        if (!swipeing) toggle(animation);    // click
+                        if (!swipeing) clickMe(view);    // click
                         return true;
                     }
                     return false;
@@ -509,7 +540,7 @@ public class Knob extends View {
                         }
                     }
                     else if (action == MotionEvent.ACTION_UP) {
-                        if (!swipeing) toggle(animation);    // click
+                        if (!swipeing) clickMe(view);    // click
                         return true;
                     }
                     return false;
@@ -540,7 +571,7 @@ public class Knob extends View {
                         }
                     }
                     else if (action == MotionEvent.ACTION_UP) {
-                        if (!swipeing) toggle(animation);    // click
+                        if (!swipeing) clickMe(view);    // click
                         return true;
                     }
                     return false;
@@ -559,7 +590,7 @@ public class Knob extends View {
                         return true;
                     }
                     else if (action == MotionEvent.ACTION_UP) {
-                        if (!swipeing) toggle(animation);    // click
+                        if (!swipeing) clickMe(view);    // click
                         return true;
                     }
                     return false;
@@ -569,12 +600,35 @@ public class Knob extends View {
                 return false;
             }
         });
+
         spring.addListener(new SimpleSpringListener(){
                                @Override
                                public void onSpringUpdate(Spring spring) {
                                    currentAngle = spring.getCurrentValue();
                                    postInvalidate();
                                }});
+    }
+
+    void createPopupMenu(View view) {
+        PopupMenu mPopupMenu = new PopupMenu(getContext(), view);
+        if (balloonValuesArray == null)
+            for (int w=0; w<numberOfStates; w++)
+                mPopupMenu.getMenu().add(Menu.NONE, w+1, w+1, Integer.toString(w));
+        else
+            for (int w=0; w<numberOfStates; w++)
+                mPopupMenu.getMenu().add(Menu.NONE, w+1, w+1, balloonValuesArray[w].toString());
+
+        mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int i = item.getItemId()-1;
+                setState(i);
+                return true;
+            }
+        });
+
+        mPopupMenu.show();
+
     }
 
     void initStatus() {
@@ -597,6 +651,16 @@ public class Knob extends View {
     public void toggle() {
         toggle(animation);
     }
+
+    public void inverseToggle(boolean animate) {
+        decreaseValue(animate);
+    }
+    public void inverseToggle() { inverseToggle(animation);}
+
+    public void revertToDefault(boolean animate) {
+        setState(defaultState, animate);
+    }
+    public void revertToDefault() { revertToDefault(animation); }
 
     private void calcActualState() {
         actualState = currentState % numberOfStates;
@@ -1069,5 +1133,13 @@ public class Knob extends View {
 
     public void setBalloonValuesSlightlyTransparent(boolean balloonValuesSlightlyTransparent) {
         this.balloonValuesSlightlyTransparent = balloonValuesSlightlyTransparent;
+    }
+
+    public int getClickBehaviour() {
+        return clickBehaviour;
+    }
+
+    public void setClickBehaviour(int clickBehaviour) {
+        this.clickBehaviour = clickBehaviour;
     }
 }

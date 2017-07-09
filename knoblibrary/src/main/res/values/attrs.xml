@@ -63,6 +63,14 @@
         <attr name="kBalloonValuesArray" format="reference"/>
         <attr name="kBalloonValuesSlightlyTransparent" format="boolean"/>
 
+        <attr name="kClickBehaviour">
+            <enum name="nothing" value = "0"/>
+            <enum name="next" value = "1"/>
+            <enum name="prev" value = "2"/>
+            <enum name="revert" value = "3"/>
+            <enum name="menu" value = "4" />
+        </attr>
+
         <attr name="kEnabled" format="boolean"/>
     </declare-styleable>
 </resources>
