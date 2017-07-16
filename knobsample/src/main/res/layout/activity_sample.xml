@@ -294,7 +294,9 @@
                     app:kSelectedStateMarkerColor="@color/red_500"
                     app:kStateMarkersColor="@color/light_blue_100"
                     app:kStateMarkersRelativeLength="0.5"
-                    app:kStateMarkersWidth="0.5dp" />
+                    app:kStateMarkersWidth="0.5dp"
+                    app:kClickBehaviour="user"
+                    />
 
                 <it.beppi.knoblibrary.Knob
                     android:id="@+id/knob3"

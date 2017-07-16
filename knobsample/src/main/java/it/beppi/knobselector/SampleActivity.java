@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -72,6 +73,13 @@ public class SampleActivity extends AppCompatActivity {
             }
         });
 
+
+        knob2.setUserBehaviour(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "This is a test click listener\nfor a knob with behaviour 'user'", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

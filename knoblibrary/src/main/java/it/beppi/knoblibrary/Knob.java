@@ -44,7 +44,11 @@ public class Knob extends View {
     public static final int ONCLICK_PREV = 2;
     public static final int ONCLICK_RESET = 3;
     public static final int ONCLICK_MENU = 4;
+    public static final int ONCLICK_USER = 5;
 
+    public static final int BALLONANIMATION_POP = 0;
+    public static final int BALLONANIMATION_SCALE = 1;
+    public static final int BALLONANIMATION_FADE = 2;
 
     // constructors
     public Knob(Context context) {
@@ -325,10 +329,11 @@ public class Knob extends View {
     private int balloonValuesTimeToLive = 400;
     private float balloonValuesRelativePosition = 1.3f;
     private float balloonValuesTextSize = 9;
-    private int balloonValuesAnimation = 0;
+    private int balloonValuesAnimation = BALLONANIMATION_POP;
     private CharSequence[] balloonValuesArray = null;
     private boolean balloonValuesSlightlyTransparent = true;
-    private int clickBehaviour = 1;   // next
+    private int clickBehaviour = ONCLICK_NEXT;   // next
+    private Runnable userRunnable = null;
 
 
     // initialize
@@ -434,29 +439,30 @@ public class Knob extends View {
         typedArray.recycle();
     }
     int swipeAttrToInt(String s) {
-        if (s == null) return 4;
-        if (s.equals("0")) return 0;
-        else if (s.equals("1")) return 1;  // vertical
-        else if (s.equals("2")) return 2;  // horizontal
-        else if (s.equals("3")) return 3;  // both
-        else if (s.equals("4")) return 4;  // default  - circular
-        else return 4;
+        if (s == null) return SWIPEDIRECTION_CIRCULAR;
+        if (s.equals("0")) return SWIPEDIRECTION_NONE;
+        else if (s.equals("1")) return SWIPEDIRECTION_VERTICAL;  // vertical
+        else if (s.equals("2")) return SWIPEDIRECTION_HORIZONTAL;  // horizontal
+        else if (s.equals("3")) return SWIPEDIRECTION_HORIZONTALVERTICAL;  // both
+        else if (s.equals("4")) return SWIPEDIRECTION_CIRCULAR;  // default  - circular
+        else return SWIPEDIRECTION_CIRCULAR;
     }
     int clickAttrToInt(String s) {
-        if (s == null) return 1;
-        if (s.equals("0")) return 0;
-        else if (s.equals("1")) return 1;  // default - next
-        else if (s.equals("2")) return 2;  // prev
-        else if (s.equals("3")) return 3;  // reset
-        else if (s.equals("4")) return 4;  // menu
-        else return 1;
+        if (s == null) return ONCLICK_NEXT;
+        if (s.equals("0")) return ONCLICK_NONE;
+        else if (s.equals("1")) return ONCLICK_NEXT;  // default - next
+        else if (s.equals("2")) return ONCLICK_PREV;  // prev
+        else if (s.equals("3")) return ONCLICK_RESET;  // reset
+        else if (s.equals("4")) return ONCLICK_MENU;  // menu
+        else if (s.equals("5")) return ONCLICK_USER;  // menu
+        else return ONCLICK_NEXT;
     }
     int balloonAnimationAttrToInt(String s) {
-        if (s == null) return 0;
-        if (s.equals("0")) return 0;       // pop
-        else if (s.equals("1")) return 1;  // scale
-        else if (s.equals("2")) return 2;  // fade
-        else return 0;
+        if (s == null) return BALLONANIMATION_POP;
+        if (s.equals("0")) return BALLONANIMATION_POP;       // pop
+        else if (s.equals("1")) return BALLONANIMATION_SCALE;  // scale
+        else if (s.equals("2")) return BALLONANIMATION_FADE;  // fade
+        else return BALLONANIMATION_POP;
     }
 
     private void disallowParentToHandleTouchEvents() {
@@ -468,11 +474,12 @@ public class Knob extends View {
 
     void clickMe(View view) {
         switch (clickBehaviour) {
-            case 0: break;
-            case 1: toggle(animation); break;
-            case 2: inverseToggle(animation); break;
-            case 3: revertToDefault(animation); break;
-            case 4: createPopupMenu(view); break;
+            case ONCLICK_NONE: break;
+            case ONCLICK_NEXT: toggle(animation); break;
+            case ONCLICK_PREV: inverseToggle(animation); break;
+            case ONCLICK_RESET: revertToDefault(animation); break;
+            case ONCLICK_MENU: createPopupMenu(view); break;
+            case ONCLICK_USER: runUserBehaviour(); break;
         }
     }
 
@@ -489,9 +496,9 @@ public class Knob extends View {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (!enabled) return false;
-                if (swipeDirection == 0) { toggle(animation); return false; }
+                if (swipeDirection == SWIPEDIRECTION_NONE) { toggle(animation); return false; }
                 int action = motionEvent.getAction();
-                if (swipeDirection == 1) {  // vertical
+                if (swipeDirection == SWIPEDIRECTION_VERTICAL) {  // vertical
                     int y = (int) motionEvent.getY();
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeY = y;
@@ -518,7 +525,7 @@ public class Knob extends View {
                     }
                     return false;
                 }
-                else if (swipeDirection == 2) {  // horizontal
+                else if (swipeDirection == SWIPEDIRECTION_HORIZONTAL) {  // horizontal
                     int x = (int) motionEvent.getX();
                     if (action == MotionEvent.ACTION_DOWN) {
                         swipeX = x;
@@ -545,7 +552,7 @@ public class Knob extends View {
                     }
                     return false;
                 }
-                else if (swipeDirection == 3) {  // both
+                else if (swipeDirection == SWIPEDIRECTION_HORIZONTALVERTICAL) {  // both
                     int x = (int) motionEvent.getX();
                     int y = (int) motionEvent.getY();
                     if (action == MotionEvent.ACTION_DOWN) {
@@ -576,7 +583,7 @@ public class Knob extends View {
                     }
                     return false;
                 }
-                else if (swipeDirection == 4) { // circular
+                else if (swipeDirection == SWIPEDIRECTION_CIRCULAR) { // circular
                     int x = (int) motionEvent.getX();
                     int y = (int) motionEvent.getY();
                     if (action == MotionEvent.ACTION_DOWN) {
@@ -1141,5 +1148,15 @@ public class Knob extends View {
 
     public void setClickBehaviour(int clickBehaviour) {
         this.clickBehaviour = clickBehaviour;
+    }
+
+    public void setUserBehaviour(Runnable userRunnable) {
+        // when "user" click behaviour is selected
+        this.userRunnable = userRunnable;
+    }
+
+    public void runUserBehaviour() {   // to be initialized with setUserBehaviour()
+        if (userRunnable == null) return;
+        userRunnable.run();
     }
 }

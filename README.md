@@ -37,7 +37,7 @@ In your Application's or Module's build.gradle file:
 
     dependencies {
         ...
-        compile 'com.github.BeppiMenozzi:Knob:1.8.0'
+        compile 'com.github.BeppiMenozzi:Knob:1.9.0'
         ...
     }
 
@@ -92,7 +92,7 @@ Here is the list of the xml attributes that can be used to customize the View. A
 <tr><th colspan="2">General</th></tr>
 <tr><td><b>kNumberOfStates</b></td><td>Number of possible states. States are numbered from 0 to n-1. This number can be changed runtime, and the indicator will adjust its position accordingly.</td></tr>
 <tr><td><b>kDefaultState</b></td><td>The starting state of the knob.</td></tr>
-<tr><td><b>kClickBehaviour</b></td><td>What is expected when the knob is clicked. Next value, previous value, reset to default value, or let the user select with a popup menu. Default is next.</td></tr>
+<tr><td><b>kClickBehaviour</b></td><td>What is expected when the knob is clicked. Next value, previous value, reset to default value, let the user select with a popup menu, define a custom listener. Default is next. Warning: the popup menu is available only with Compat. Warning: the customer listener (a Runnable) should be defined runtime, with <i>setUserBehaviour()</i></td></tr>
 <tr><td><b>kAnimation</b></td><td>Enable / disable indicator's animation.</td></tr>
 <tr><td><b>kAnimationSpeed</b></td><td>Parameter "speed" applied to the spring physical model for the indicator's animation.</td></tr>
 <tr><td><b>kAnimationBounciness</b></td><td>Parameter "bounciness" applied to the spring physical model for the indicator's animation.</td></tr>
@@ -143,6 +143,9 @@ Here is the list of the xml attributes that can be used to customize the View. A
 ### Dependencies
 You don't have to add any dependency.
 Internally, this library uses my other <a href="https://github.com/BeppiMenozzi/BalloonPopup">Balloon Popup library</a> to display... guess... balloon popups.
+
+### New in 1.9.0
+* Added 'user' click behaviour
 
 ### New in 1.8.0
 * Fixed: default swipe direction (thanks for pull request)
